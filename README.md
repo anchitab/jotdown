@@ -17,25 +17,28 @@
 > ## Phase I
 > A minimal text editor for students, by students. 
  > * Why is it important or interesting to you?
- Text editors are a crucial part of a computer science student’s workspace. Many rely on this tool not only for coding purposes but also for taking notes, jotting ideas, and even writing assignments. We are avid users of text editors and want to create one for us to use. We want to build a Markdown text editor to allow readability but also allows stylistic elements like bold and italicize. 
+ >   * Text editors are a crucial part of a computer science student’s workspace. Many rely on this tool not only for coding purposes but also for taking notes, jotting ideas, and even writing assignments. We are avid users of text editors and want to create one for us to use. We want to build a Markdown text editor to allow readability but also allows stylistic elements like bold and italicize. 
  
  > * What languages/tools/technologies do you plan to use? (This list may change over the course of the project)
  >   * [C++](https://www.cplusplus.com/) - An extension of the C programming language optimized for building high-performance applications
  >   * [HTML](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5) - Hypertext Markup Language is a markup language for docs displayed in a browser
  >   * [Vanilla JS](https://www.javascript.com/) - Javascript is a scripting language used on both client and server sides allowing pages to be interactive
  >   * [Git](https://git-scm.com/) - A distributed version control system to track updates in code during development within teams
+ >   * [Qt](https://www.qt.io/) - Toolkit for creating graphical user interface
  
  > * What will be the input/output of your project?
- 
- > * What are the three design patterns you will be using. For each design pattern you must:
- >   * Explain in 3 - 5 sentences why you picked this pattern and what feature you will implement with it
- > * This description should be in enough detail that the TA/instructor can determine the complexity of the project and if it is sufficient for the team members to complete in the time allotted. 
+ >    * The input will be text that users put into the document and the output is the properly formatted text in alliance to Markdown syntax. 
+
  >   ### Pattern 1: Memento 
  >   #### Features: Undo, Cursor, Scroll Text, Edit History
  >   * Memento enables developers to work on the previous state of objects in the program. This allows features such as undo and edit history to be created as this design pattern can both save and restore the state of its objects. In our project, we plan to implement features such as the scroll position, undo button, cursors coordinates, and edit history. As Memento doesn’t alter the internal structure of the objects, a lot of these features can be created using this design pattern.
- >   ### Pattern 1: Composite 
+ >   ### Pattern 2: Composite 
  >   #### Features: GUI
  >   * Composite enables developers to organize objects into tree structures and navigate these trees as individual objects.  In our program, the user will be able to interact with our project through a GUI or Graphical User Interface. This design pattern allows us to integrate new elements without breaking the previous code. This pattern reduces technical debt as you do not need to use concrete classes or objects since complex and simple elements are all treated uniformly. 
+ >   ### Pattern 3: Abstract Factory
+ >   #### Features: Copy/Paste, Search/Replace, Nightmode Customization 
+ >   * The Abstract Factory Design Pattern essentially helps create families of objects that are related to each other without needing to name their concrete classes. In our program, we hope to implement features such as the ability to customize screen preference, copy/paste function, and enable users to search and replace. This design pattern allows us to integrate new elements without breaking the previous code.
+
 
  > ## Phase II
  > In addition to completing the "Class Diagram" section below, you will need to 
