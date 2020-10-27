@@ -33,7 +33,9 @@
  >   ### Pattern 1: Memento 
  >   #### Features: Undo, Cursor, Scroll Text, Edit History
  >   * Memento enables developers to work on the previous state of objects in the program. This allows features such as undo and edit history to be created as this design pattern can both save and restore the state of its objects. In our project, we plan to implement features such as the scroll position, undo button, cursors coordinates, and edit history. As Memento doesn’t alter the internal structure of the objects, a lot of these features can be created using this design pattern.
-
+ >   ### Pattern 1: Composite 
+ >   #### Features: GUI
+ >   * Composite enables developers to organize objects into tree structures and navigate these trees as individual objects.  In our program, the user will be able to interact with our project through a GUI or Graphical User Interface. This design pattern allows us to integrate new elements without breaking the previous code. This pattern reduces technical debt as you do not need to use concrete classes or objects since complex and simple elements are all treated uniformly. 
 
  > ## Phase II
  > In addition to completing the "Class Diagram" section below, you will need to 
