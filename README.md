@@ -47,11 +47,18 @@
 ### MVC Diagram
 Our Model, View, and Controller Diagram was used to showcase how we plan to design our Graphical User Interface. The GUI Model contains the essential features of our GUI including textfind, textreplace, userinput, etc. GUI View contains the code that the user directly works with, including button functions and page handling. Finally, GUI Controller is the medium between Model and View, as it digests the user input and decides which action will follow. 
 
+<img src = "ModelViewController.png">
 
 ### Abstract Factory Diagram 
 We chose this design pattern for our night-shift mode and day-shift modes. The reasoning behind this decision is that this design pattern allows us to create families of related objects without the need to create concrete classes.  In our diagram, our family or explicit interface is “Theme”, and its variants are “DayTheme” and “NightTheme”. Then, we have declared our Abstract Factory as “ThemeFactory”, with creation methods of createMenuBar, createButtons, etc. Then we have our variants as discussed above and their respective creational methods. Below these, we have our Abstract and Concrete  Products. 
 
+<img src = "AbstractFactory.png">
 
+### Memento Diagram 
+
+We chose the design pattern Memento to implement the undo feature into our project.  The Originator class creates a “state” by taking a snapshot of its current state, which additionally allows it to restore to previous states. The memento class is the value that behaves as the aforementioned snapshot of the state. Finally, the Caretaker class manages when the snapshots should be taken as when it should be restored (the undo function).
+
+<img src = "Memento.png">
  
  > ## Phase III
  > You will need to schedule a check-in with the TA (during lab hours or office hours). Your entire team must be present. 
