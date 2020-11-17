@@ -44,6 +44,15 @@
 ## Class Diagram
  > Include a class diagram(s) for each design pattern and a description of the diagram(s). This should be in sufficient detail that another group could pick up the project this point and successfully complete it. Use proper OMT notation (as discussed in the course slides). You may combine multiple design patterns into one diagram if you'd like, but it needs to be clear which portion of the diagram represents which design pattern (either in the diagram or in the description). 
  
+### MVC Diagram
+Our Model, View, and Controller Diagram was used to showcase how we plan to design our Graphical User Interface. The GUI Model contains the essential features of our GUI including textfind, textreplace, userinput, etc. GUI View contains the code that the user directly works with, including button functions and page handling. Finally, GUI Controller is the medium between Model and View, as it digests the user input and decides which action will follow. 
+
+
+### Abstract Factory Diagram 
+We chose this design pattern for our night-shift mode and day-shift modes. The reasoning behind this decision is that this design pattern allows us to create families of related objects without the need to create concrete classes.  In our diagram, our family or explicit interface is “Theme”, and its variants are “DayTheme” and “NightTheme”. Then, we have declared our Abstract Factory as “ThemeFactory”, with creation methods of createMenuBar, createButtons, etc. Then we have our variants as discussed above and their respective creational methods. Below these, we have our Abstract and Concrete  Products. 
+
+
+ 
  > ## Phase III
  > You will need to schedule a check-in with the TA (during lab hours or office hours). Your entire team must be present. 
  > * Before the meeting you should perform a sprint plan like you did in Phase II
