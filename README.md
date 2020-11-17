@@ -1,10 +1,10 @@
 
 # ✍️ Jotdown 
  
- > Authors: [Anchita Bora](https://github.com/anchitab), [Jeana Tijerina ](https://github.com/Jeana-T), [Dhruvi Faria](https://github.com/Jeana-T)
+  Authors: [Anchita Bora](https://github.com/anchitab), [Jeana Tijerina ](https://github.com/Jeana-T), [Dhruvi Faria](https://github.com/Jeana-T)
  
 ## Project Description
-> ## Phase I
+ ## Phase I
  A minimal text editor for students, by students. 
  * Why is it important or interesting to you?
     * Text editors are a crucial part of a computer science student’s workspace. Many rely on this tool not only for coding purposes but also for taking notes, jotting ideas, and even writing assignments. We are avid users of text editors and want to create one for us to use. We want to build a Markdown text editor to allow readability but also allows stylistic elements like bold and italicize. 
