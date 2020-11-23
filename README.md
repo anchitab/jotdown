@@ -1,7 +1,7 @@
 
 # ✍️ Jotdown 
  
-  Authors: [Anchita Bora](https://github.com/anchitab), [Jeana Tijerina ](https://github.com/Jeana-T), [Dhruvi Faria](https://github.com/Jeana-T)
+  Authors: [Anchita Bora](https://github.com/anchitab), [Jeana Tijerina ](https://github.com/Jeana-T), [Dhruvi Faria](https://github.com/dhruvif)
  
 ## Project Description
  ## Phase I
@@ -10,11 +10,9 @@
     * Text editors are a crucial part of a computer science student’s workspace. Many rely on this tool not only for coding purposes but also for taking notes, jotting ideas, and even writing assignments. We are avid users of text editors and want to create one for us to use. We want to build a Markdown text editor to allow readability but also allows stylistic elements like bold and italicize. 
  
  * What languages/tools/technologies do you plan to use? (This list may change over the course of the project)
-    * [C++](https://www.cplusplus.com/) - An extension of the C programming language optimized for building high-performance applications
-    * [HTML](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5) - Hypertext Markup Language is a markup language for docs displayed in a browser
-    * [Vanilla JS](https://www.javascript.com/) - Javascript is a scripting language used on both client and server sides allowing pages to be interactive
+    * [Python](https://www.cplusplus.com/) - An extension of the C programming language optimized for building high-performance applications
+    * [Tkinter](https://docs.python.org/3/library/tkinter.html) - The standard Python interface to the Tk GUI toolkit
     * [Git](https://git-scm.com/) - A distributed version control system to track updates in code during development within teams
-    * [Qt](https://www.qt.io/) - Toolkit for creating graphical user interface
  
   * What will be the input/output of your project?
      * The input will be text that users put into the document and the output is the properly formatted text in alliance to Markdown syntax. 
