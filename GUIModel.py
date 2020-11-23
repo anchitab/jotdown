@@ -146,7 +146,7 @@ class GUIModel:
 				# Set window title 
 				self.root.title(os.path.basename(self.file) + " - Jotdown") 
 				
-			
+		# If file already named save using that name (does not ask for user input)	
 		else: 
 			file = open(self.file,"w") 
 			file.write(self.GUITextArea.get(1.0,END)) 
