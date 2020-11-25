@@ -35,6 +35,50 @@ class GUIModel(Frame):
 		self.outputbox.pack(fill=BOTH, expand=1, side=RIGHT)
 		self.outputbox.fit_height()
 		self.inputeditor.bind("<<Modified>>", self.onInputChange)		
+		self.GUIMenuBar = Menu(self) 
+		self.GUIFileMenu = Menu(self.GUIMenuBar, tearoff=0) 
+		self.GUIEditMenu = Menu(self.GUIMenuBar, tearoff=0) 
+		self.GUIHelpMenu = Menu(self.GUIMenuBar, tearoff=0) 
+
+		# Allow text to resize to window
+		self.master.grid_rowconfigure(0, weight=1) 
+		self.master.grid_columnconfigure(0, weight=1)  
+		
+		# To open new file 
+		self.GUIFileMenu.add_command(label="New", command=self.newFile)	 
+		
+		# To open a already existing file 
+		self.GUIFileMenu.add_command(label="Open", command=self.openFile) 
+		
+		# To save current file 
+		self.GUIFileMenu.add_command(label="Save", command=self.saveFile)	 
+		
+		self.GUIMenuBar.add_cascade(label="File", menu=self.GUIFileMenu)	 
+		
+		# To give a feature of cut 
+		self.GUIEditMenu.add_command(label="Cut", command=self.cut)			 
+		
+		# to give a feature of copy	 
+		self.GUIEditMenu.add_command(label="Copy", command=self.copy)		 
+		
+		# To give a feature of paste 
+		self.GUIEditMenu.add_command(label="Paste", command=self.paste)		 
+		
+		# To give a feature of editing 
+		self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)	 
+		
+		# To create a feature of description of the notepad 
+		self.GUIHelpMenu.add_command(label="About Jotdown", command=self.openAbout) 
+		self.GUIMenuBar.add_cascade(label="Help", menu=self.GUIHelpMenu) 
+
+		self.master.config(menu=self.GUIMenuBar)
+
+#		self.GUIScrollBar.pack(side=RIGHT,fill=Y)					 
+		
+		# Scrollbar will adjust automatically according to the content		 
+#		self.GUIScrollBar.config(command=self.GUITextArea.yview)	 
+#		self.GUITextArea.config(yscrollcommand=self.GUIScrollBar.set) 
+	
 
 root = Tk() 
 root.geometry("600x500")
