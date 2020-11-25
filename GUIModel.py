@@ -176,6 +176,19 @@ class GUIModel(Frame):
 		self.inputeditor.config(bg=main_color, fg=text_color)
 		self.outputbox.config(bg=main_color, fg=text_color)
 		
+	# Turn On Day Mode:
+	def day_mode():
+		main_color = "SystemButtonFace"
+		second_color = "SystemButtonFace"
+		text_color = "black"
+
+		root.config(bg=main_color)
+		self.GUIFileMenu.config(bg=main_color, fg=text_color)
+		self.GUIEditMenu.config(bg=main_color, fg=text_color)
+		self.GUIDisplayMenu.config(bg=main_color, fg=text_color)
+		self.GUIMenuBar.config(bg=main_color, fg=text_color)
+		self.inputeditor.config(bg=main_color, fg=text_color)
+		self.outputbox.config(bg=main_color, fg=text_color)
 
 
 	
