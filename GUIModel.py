@@ -108,6 +108,29 @@ class GUIModel(Frame):
 		self.file = None
 		self.inputeditor.delete(1.0,END)
 
+	def saveFile(self): 
+		
+		if self.file == None: 
+			# Save as new file + name file
+			self.file = asksaveasfilename(initialfile='Untitled.txt', defaultextension=".txt", filetypes=[("All Files","*.*"), ("Text Documents","*.txt")]) 
+
+			if self.file == "": 
+				self.file = None
+			else: 
+				
+				# Save the file 
+				file = open(self.file,"w") 
+				file.write(self.inputeditor.get(1.0,END)) #
+				file.close() 
+				
+				# Set window title 
+				self.master.title(os.path.basename(self.file) + " - Jotdown") 
+		
+		# If file already named save using that name (does not ask for user input)	
+		else: 
+			file = open(self.file,"w") 
+			file.write(self.inputeditor.get(1.0,END))
+			file.close()  
 
 
 root = Tk() 
