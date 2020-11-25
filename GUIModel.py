@@ -78,7 +78,31 @@ class GUIModel(Frame):
 		# Scrollbar will adjust automatically according to the content		 
 #		self.GUIScrollBar.config(command=self.GUITextArea.yview)	 
 #		self.GUITextArea.config(yscrollcommand=self.GUIScrollBar.set) 
-	
+	def openAbout(self): 
+		showinfo("Jotdown","A minimal text editor for students, by students.") 
+
+	def openFile(self): 
+		
+		self.file = askopenfilename(defaultextension=".txt", filetypes=[("All Files","*.*"), ("Text Documents","*.txt")]) 
+
+		if self.file == "": 
+			
+			# if there is no file to open 
+			self.file = None
+		
+		else: 	
+
+			# Open the file 
+			# Change window title 
+			self.master.title(os.path.basename(self.file) + " - Jotdown") 
+			self.inputeditor.delete(1.0,END)
+
+			file = open(self.file,"r") 
+
+			self.inputeditor.insert(1.0,file.read())
+
+			file.close() 
+
 
 root = Tk() 
 root.geometry("600x500")
