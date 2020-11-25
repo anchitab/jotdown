@@ -26,7 +26,7 @@ class GUIModel(Frame):
 		self.master.title("Untitled - Jotdown")
 		self.pack(fill=BOTH, expand=1)
 		# Allow left side to take in text
-		self.inputeditor = Text(self, width="1", font=self.myfont)
+		self.inputeditor = Text(self, width="1", font=self.myfont, undo=True)
 		# Set inputeditor on left side
 		self.inputeditor.pack(fill=BOTH, expand=1, side=LEFT)
 		# Set outputbox to display text
@@ -84,6 +84,12 @@ class GUIModel(Frame):
 		self.GUIFileMenu.add_command(label="Save", command=self.saveFile)	 
 		
 		self.GUIMenuBar.add_cascade(label="File", menu=self.GUIFileMenu)	 
+
+		# To give a feature of undo 
+		self.GUIEditMenu.add_command(label="Undo", command=self.undo)	
+
+		# To give a feature of redo 
+		self.GUIEditMenu.add_command(label="Redo", command=self.redo)
 		
 		# To give a feature of cut 
 		self.GUIEditMenu.add_command(label="Cut", command=self.cut)			 
@@ -171,6 +177,13 @@ class GUIModel(Frame):
 
 	def cut(self): 
 		self.inputeditor.event_generate("<<Cut>>")
+
+	def undo(self): 
+		self.inputeditor.event_generate("<<Undo>>") #
+
+	def redo(self): 
+		self.inputeditor.event_generate("<<Redo>>") #
+	
 
 # Convert the inputer text to markdown and output converted text to outputbox
 	def onInputChange(self, event):
