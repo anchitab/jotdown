@@ -132,6 +132,14 @@ class GUIModel(Frame):
 			file.write(self.inputeditor.get(1.0,END))
 			file.close()  
 
+	def copy(self): 
+		self.inputeditor.event_generate("<<Copy>>") 
+
+	def paste(self): 
+		self.inputeditor.event_generate("<<Paste>>")
+
+	def cut(self): 
+		self.inputeditor.event_generate("<<Cut>>")
 
 root = Tk() 
 root.geometry("600x500")
