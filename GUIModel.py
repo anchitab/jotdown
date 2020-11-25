@@ -29,6 +29,12 @@ class GUIModel(Frame):
 		self.inputeditor = Text(self, width="1", font=self.myfont)
 		# Set inputeditor on left side
 		self.inputeditor.pack(fill=BOTH, expand=1, side=LEFT)
+		# Set outputbox to display text
+		self.outputbox = HTMLLabel(self, width="1", background="white", html="<h1> Welcome to Jotdown ✍️ </h1>")
+		# Set outputbox on right side
+		self.outputbox.pack(fill=BOTH, expand=1, side=RIGHT)
+		self.outputbox.fit_height()
+		self.inputeditor.bind("<<Modified>>", self.onInputChange)		
 
 root = Tk() 
 root.geometry("600x500")
