@@ -141,6 +141,14 @@ class GUIModel(Frame):
 	def cut(self): 
 		self.inputeditor.event_generate("<<Cut>>")
 
+# Convert the inputer text to markdown and output converted text to outputbox
+	def onInputChange(self, event):
+		self.inputeditor.edit_modified(0)
+		md2html = Markdown()
+		markdownText = self.inputeditor.get("1.0", END)
+		html = md2html.convert(markdownText)
+		self.outputbox.set_html(html)	
+
 root = Tk() 
 root.geometry("600x500")
 
