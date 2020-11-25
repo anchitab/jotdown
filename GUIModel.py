@@ -102,6 +102,12 @@ class GUIModel(Frame):
 			self.inputeditor.insert(1.0,file.read())
 
 			file.close() 
+	
+	def newFile(self): 
+		self.master.title("Untitled - Jotdown") 
+		self.file = None
+		self.inputeditor.delete(1.0,END)
+
 
 
 root = Tk() 
