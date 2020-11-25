@@ -21,6 +21,14 @@ class GUIModel(Frame):
 		self.myfont = font.Font(family="Helvetica", size=14)
 		self.init_window()
 
+	def init_window(self):
+		# Default window title when Jotdown opens		
+		self.master.title("Untitled - Jotdown")
+		self.pack(fill=BOTH, expand=1)
+		# Allow left side to take in text
+		self.inputeditor = Text(self, width="1", font=self.myfont)
+		# Set inputeditor on left side
+		self.inputeditor.pack(fill=BOTH, expand=1, side=LEFT)
 
 root = Tk() 
 root.geometry("600x500")
