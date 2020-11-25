@@ -38,7 +38,8 @@ class GUIModel(Frame):
 		self.GUIMenuBar = Menu(self) 
 		self.GUIFileMenu = Menu(self.GUIMenuBar, tearoff=0) 
 		self.GUIEditMenu = Menu(self.GUIMenuBar, tearoff=0) 
-		self.GUIHelpMenu = Menu(self.GUIMenuBar, tearoff=0) 
+		self.GUIHelpMenu = Menu(self.GUIMenuBar, tearoff=0)
+		self.GUIDisplayMenu = Menu(self.GUIMenuBar, tearoff=0) 
 
 		# Allow text to resize to window
 		self.master.grid_rowconfigure(0, weight=1) 
@@ -77,6 +78,10 @@ class GUIModel(Frame):
 		self.GUIHelpMenu.add_command(label="About Jotdown", command=self.openAbout) 
 		self.GUIMenuBar.add_cascade(label="Help", menu=self.GUIHelpMenu) 
 
+		#Display Menu Bar Dropdown
+		self.GUIDisplayMenu.add_command(label="Nightmode 🌙", command=self.night_mode)
+		self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=self.copy)
+		self.GUIMenuBar.add_cascade(label="Display", menu=self.GUIDisplayMenu)
 		self.master.config(menu=self.GUIMenuBar)
 
 #		self.GUIScrollBar.pack(side=RIGHT,fill=Y)					 
@@ -161,6 +166,19 @@ class GUIModel(Frame):
 		markdownText = self.inputeditor.get("1.0", END)
 		html = md2html.convert(markdownText)
 		self.outputbox.set_html(html)	
+
+	# Turn on Night Mode
+	def night_mode(self):
+		main_color = "#292a31"
+		second_color = "#373737"
+		text_color = "white"
+
+		self.inputeditor.config(bg=main_color, fg=text_color)
+		self.outputbox.config(bg=main_color, fg=text_color)
+		
+
+
+	
 
 root = Tk() 
 root.geometry("600x500")
