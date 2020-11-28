@@ -1,5 +1,9 @@
 import tkinter 
-import os	 
+import os
+
+# from displayyyy import *
+# # from display import *
+
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import *
@@ -80,7 +84,7 @@ class GUIModel(Frame):
 
 		#Display Menu Bar Dropdown
 		self.GUIDisplayMenu.add_command(label="Nightmode 🌙", command=self.night_mode)
-		self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=self.copy)
+		self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=self.day_mode)
 		self.GUIMenuBar.add_cascade(label="Display", menu=self.GUIDisplayMenu)
 		self.master.config(menu=self.GUIMenuBar)
 
@@ -177,7 +181,7 @@ class GUIModel(Frame):
 		self.outputbox.config(bg=main_color, fg=text_color)
 		
 	# Turn On Day Mode:
-	def day_mode():
+	def day_mode(self):
 		main_color = "SystemButtonFace"
 		second_color = "SystemButtonFace"
 		text_color = "black"
