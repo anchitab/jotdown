@@ -61,8 +61,9 @@ class GUIModel(Frame):
 		undoCommand = UndoCommand(self.inputeditor)
 		self.GUIEditMenu.add_command(label="Undo", command=undoCommand.execute)	
 
-		# To give a feature of redo 
-		self.GUIEditMenu.add_command(label="Redo", command=self.redo)
+		# To give a feature of redo
+		redoCommand = RedoCommand(self.inputeditor) 
+		self.GUIEditMenu.add_command(label="Redo", command=redoCommand.execute)
 		
 		# To give a feature of cut 
 		cutCommand = CutCommand(self.inputeditor)
@@ -85,7 +86,7 @@ class GUIModel(Frame):
 
 		#Display Menu Bar Dropdown
 		self.GUIDisplayMenu.add_command(label="Nightmode 🌙", command=self.night_mode)
-		self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=self.copy)
+		self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=self.day_mode)
 		self.GUIMenuBar.add_cascade(label="Display", menu=self.GUIDisplayMenu)
 		self.master.config(menu=self.GUIMenuBar)
 
@@ -148,20 +149,20 @@ class GUIModel(Frame):
 			file.write(self.inputeditor.get(1.0,END))
 			file.close()  
 
-	def copy(self): 
-		self.inputeditor.event_generate("<<Copy>>") 
+	# def copy(self): 
+	# 	self.inputeditor.event_generate("<<Copy>>") 
 
-	def paste(self): 
-		self.inputeditor.event_generate("<<Paste>>")
+	# def paste(self): 
+	# 	self.inputeditor.event_generate("<<Paste>>")
 
-	def cut(self): 
-		self.inputeditor.event_generate("<<Cut>>")
+	# def cut(self): 
+	# 	self.inputeditor.event_generate("<<Cut>>")
 
-	def undo(self): 
-		self.inputeditor.event_generate("<<Undo>>") #
+	# def undo(self): 
+	# 	self.inputeditor.event_generate("<<Undo>>") #
 
-	def redo(self): 
-		self.inputeditor.event_generate("<<Redo>>") #
+	# def redo(self): 
+	# 	self.inputeditor.event_generate("<<Redo>>") #
 	
 
 # Convert the inputer text to markdown and output converted text to outputbox
@@ -226,6 +227,13 @@ class UndoCommand(Command):
 
 	def execute(self) -> None:
 	    self.inputEditor.event_generate("<<Undo>>")
+
+class RedoCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+	    self.inputEditor.event_generate("<<Redo>>")
 
 root = Tk() 
 root.geometry("600x500")
