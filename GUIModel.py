@@ -71,7 +71,8 @@ class GUIModel(Frame):
 		self.GUIEditMenu.add_command(label="Copy", command=copyCommand.execute)	 
 		
 		# To give a feature of paste 
-		self.GUIEditMenu.add_command(label="Paste", command=self.paste)		 
+		cutCommand = CutCommand(self.inputeditor)
+		self.GUIEditMenu.add_command(label="Paste", command=cutCommand.execute)		 
 		
 		# To give a feature of editing 
 		self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)	 
@@ -202,6 +203,13 @@ class CopyCommand(Command):
 
 	def execute(self) -> None:
 	    self.inputEditor.event_generate("<<Copy>>")
+
+class CutCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+	    self.inputEditor.event_generate("<<Cut>>")
 
 
 
