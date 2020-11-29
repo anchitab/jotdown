@@ -9,6 +9,7 @@ from tkhtmlview import HTMLLabel
 from tkinter import messagebox as mbox
 from markdown2 import Markdown
 
+
 class GUIModel(Frame): 
 	# Adds vertical scrollbar 
 #	GUIScrollBar = Scrollbar(GUITextArea)	 
@@ -66,7 +67,8 @@ class GUIModel(Frame):
 		self.GUIEditMenu.add_command(label="Cut", command=self.cut)			 
 		
 		# to give a feature of copy	 
-		self.GUIEditMenu.add_command(label="Copy", command=self.copy)		 
+		copyCommand = CopyCommand(self.inputeditor)
+		self.GUIEditMenu.add_command(label="Copy", command=copyCommand.execute)	 
 		
 		# To give a feature of paste 
 		self.GUIEditMenu.add_command(label="Paste", command=self.paste)		 
@@ -170,16 +172,16 @@ class GUIModel(Frame):
 	# Turn on Night Mode
 	def night_mode(self):
 		main_color = "#292a31"
-		second_color = "#373737"
+		#second_color = "#373737"
 		text_color = "white"
 
 		self.inputeditor.config(bg=main_color, fg=text_color)
 		self.outputbox.config(bg=main_color, fg=text_color)
 		
 	# Turn On Day Mode:
-	def day_mode():
+	def day_mode(self):
 		main_color = "SystemButtonFace"
-		second_color = "SystemButtonFace"
+		#second_color = "SystemButtonFace"
 		text_color = "black"
 
 		root.config(bg=main_color)
@@ -190,8 +192,18 @@ class GUIModel(Frame):
 		self.inputeditor.config(bg=main_color, fg=text_color)
 		self.outputbox.config(bg=main_color, fg=text_color)
 
+class Command(GUIModel):
+	def execute(self) -> None:
+	    pass
 
-	
+class CopyCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+	    self.inputEditor.event_generate("<<Copy>>")
+
+
 
 root = Tk() 
 root.geometry("600x500")
@@ -199,3 +211,9 @@ root.geometry("600x500")
 # Run main application 
 Jotdown = GUIModel(root) 
 Jotdown.mainloop()
+
+
+
+
+
+
