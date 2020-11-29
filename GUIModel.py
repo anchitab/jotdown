@@ -58,7 +58,8 @@ class GUIModel(Frame):
 		self.GUIMenuBar.add_cascade(label="File", menu=self.GUIFileMenu)	 
 
 		# To give a feature of undo 
-		self.GUIEditMenu.add_command(label="Undo", command=self.undo)	
+		undoCommand = UndoCommand(self.inputeditor)
+		self.GUIEditMenu.add_command(label="Undo", command=undoCommand.execute)	
 
 		# To give a feature of redo 
 		self.GUIEditMenu.add_command(label="Redo", command=self.redo)
@@ -218,6 +219,13 @@ class PasteCommand(Command):
 
 	def execute(self) -> None:
 	    self.inputEditor.event_generate("<<Paste>>")
+
+class UndoCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+	    self.inputEditor.event_generate("<<Undo>>")
 
 root = Tk() 
 root.geometry("600x500")
