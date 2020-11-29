@@ -64,15 +64,16 @@ class GUIModel(Frame):
 		self.GUIEditMenu.add_command(label="Redo", command=self.redo)
 		
 		# To give a feature of cut 
-		self.GUIEditMenu.add_command(label="Cut", command=self.cut)			 
+		cutCommand = CutCommand(self.inputeditor)
+		self.GUIEditMenu.add_command(label="Cut", command=cutCommand.execute)			 
 		
 		# to give a feature of copy	 
 		copyCommand = CopyCommand(self.inputeditor)
 		self.GUIEditMenu.add_command(label="Copy", command=copyCommand.execute)	 
 		
 		# To give a feature of paste 
-		cutCommand = CutCommand(self.inputeditor)
-		self.GUIEditMenu.add_command(label="Paste", command=cutCommand.execute)		 
+		pasteCommand = PasteCommand(self.inputeditor)
+		self.GUIEditMenu.add_command(label="Paste", command=pasteCommand.execute)		 
 		
 		# To give a feature of editing 
 		self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)	 
@@ -211,7 +212,12 @@ class CutCommand(Command):
 	def execute(self) -> None:
 	    self.inputEditor.event_generate("<<Cut>>")
 
+class PasteCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
 
+	def execute(self) -> None:
+	    self.inputEditor.event_generate("<<Paste>>")
 
 root = Tk() 
 root.geometry("600x500")
