@@ -17,12 +17,14 @@ class View(Frame):
         self.myfont = font.Font(family="Helvetica", size=14)
         self.pack(fill=BOTH, expand=1)
         # Allow left side to take in text
-        self.inputeditor = Text(self, width="1", font = self.myfont, undo = True)
+        self.inputeditor = Text(self, width = "1", font = self.myfont, undo = True)
         # Set inputeditor on left side
         self.inputeditor.pack(fill = BOTH, expand = 1, side = LEFT)
-        
+        # Set outputbox to display text
+        self.outputbox = HTMLLabel(self, width = "1", background = "white", html = "<h1> Welcome to Jotdown ✍️ </h1>")
         # Set outputbox on right side
         self.outputbox.pack(fill = BOTH, expand = 1, side = RIGHT)
+        self.outputbox.fit_height()
         
 
 class Model():   
