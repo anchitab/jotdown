@@ -31,6 +31,10 @@ class View(Frame):
     def inputText(self):
         self.inputeditor.edit_modified(0)
 
+    def getMarkdownText(self):
+        markdownText = self.inputeditor.get("1.0", END)
+        return markdownText
+
 class Model():   
     def onInputChange(self):
         self.md2html = Markdown()
@@ -45,6 +49,7 @@ class Controller():
         self.view = view
         view.init_window(root)
         model.onInputChange()
+        markdownText = view.getMarkdownText()
         model.getHTML(markdownText)
 
 root = Tk()
