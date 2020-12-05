@@ -10,6 +10,9 @@ from tkinter import messagebox as mbox
 from markdown2 import Markdown
 
 class View(Frame):
+    def __init__(self, master = None):
+        self,init_window(master)
+    
     def init_window(self, master = None):
         # Default window title when Jotdown opens
         Frame.__init__(self, master)
@@ -35,7 +38,7 @@ class View(Frame):
         markdownText = self.inputeditor.get("1.0", END)
         return markdownText
 
-    def outputText(self, html)
+    def outputText(self, html):
         self.outputbox.set_html(html)
 
 class Model():   
