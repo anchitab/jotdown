@@ -17,6 +17,7 @@ class View(Frame):
         self.myfont = font.Font(family="Helvetica", size=14)
         self.pack(fill=BOTH, expand=1)
         # Allow left side to take in text
+        self.inputeditor = Text(self, width="1", font = self.myfont, undo = True)
         
 
 class Model():   
