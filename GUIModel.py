@@ -9,6 +9,9 @@ from tkhtmlview import HTMLLabel
 from tkinter import messagebox as mbox
 from markdown2 import Markdown
 
+# class Command(GUIModel):
+# 	def execute(self) -> None:
+# 	    pass 
 
 class GUIModel(Frame): 
 	# Adds vertical scrollbar 
@@ -20,6 +23,7 @@ class GUIModel(Frame):
 		Frame.__init__(self, master)
 		self.master = master
 		self.myfont = font.Font(family="Helvetica", size=14)
+		# self.invoker = Invoker()
 		self.init_window()
 
 	def init_window(self):
@@ -35,6 +39,7 @@ class GUIModel(Frame):
 		# Set outputbox on right side
 		self.outputbox.pack(fill=BOTH, expand=1, side=RIGHT)
 		self.outputbox.fit_height()
+
 		self.inputeditor.bind("<<Modified>>", self.onInputChange)		
 		self.GUIMenuBar = Menu(self) 
 		self.GUIFileMenu = Menu(self.GUIMenuBar, tearoff=0) 
@@ -42,14 +47,17 @@ class GUIModel(Frame):
 		self.GUIHelpMenu = Menu(self.GUIMenuBar, tearoff=0)
 		self.GUIDisplayMenu = Menu(self.GUIMenuBar, tearoff=0) 
 
+		self.master.title("Untitled - Jotdown") 
+
 		# Allow text to resize to window
 		self.master.grid_rowconfigure(0, weight=1) 
 		self.master.grid_columnconfigure(0, weight=1)  
 
 		# To open new file  
 		newFileCommand = NewFileCommand(self.inputeditor)
-		self.GUIFileMenu.add_command(label="New", command=newFileCommand.execute)	
-		
+		self.GUIFileMenu.add_command(label="New", command=newFileCommand.execute)
+		# self.GUIFileMenu.add_command(label="New", command=callInvoker(newFileCommand))
+	
 		# To open a already existing file 
 		openFileCommand = OpenFileCommand(self.inputeditor)
 		self.GUIFileMenu.add_command(label="Open", command=openFileCommand.execute)		
@@ -98,6 +106,9 @@ class GUIModel(Frame):
 		# Scrollbar will adjust automatically according to the content		 
 		# self.GUIScrollBar.config(command=self.GUITextArea.yview)	 
 		# self.GUITextArea.config(yscrollcommand=self.GUIScrollBar.set) 
+		# def callInvoker(self, command:Command):
+		# 	self.invoker.setCommand(command)
+		# 	self.invoker.executeCommand()
 		
 	def openAbout(self): 
 		showinfo("Jotdown","A minimal text editor for students, by students.") 
@@ -154,11 +165,11 @@ class OpenFileCommand(Command):
 			# Open the file 
 			# Change window title 
 			self.master.title(os.path.basename(self.file) + " - Jotdown") 
-			self.inputeditor.delete(1.0,END)
+			self.inputEditor.delete(1.0,END)
 
 			file = open(self.file,"r") 
 
-			self.inputeditor.insert(1.0,file.read())
+			self.inputEditor.insert(1.0,file.read())
 
 			file.close() 
 
@@ -167,10 +178,9 @@ class NewFileCommand(Command):
 		self.inputEditor = inputEditor
 
 	def execute(self) -> None:
-	    # self.inputEditor.event_generate("<<New>>")
-		self.master.title("Untitled - Jotdown") 
+		# print("reachednewfile")
 		self.file = None
-		self.inputeditor.delete(1.0,END)
+		self.inputEditor.delete(1.0,END)
 
 class SaveFileCommand(Command):
 	def __init__(self, inputEditor: Text) -> None:
@@ -186,7 +196,7 @@ class SaveFileCommand(Command):
 			else: 
 				# Save the file 
 				file = open(self.file,"w") 
-				file.write(self.inputeditor.get(1.0,END)) 
+				file.write(self.inputEditor.get(1.0,END)) 
 				file.close() 
 				
 				# Set window title 
@@ -195,7 +205,7 @@ class SaveFileCommand(Command):
 		# If file already named save using that name (does not ask for user input)	
 		else: 
 			file = open(self.file,"w") 
-			file.write(self.inputeditor.get(1.0,END))
+			file.write(self.inputEditor.get(1.0,END))
 			file.close()
 
 class CopyCommand(Command):
@@ -232,6 +242,15 @@ class RedoCommand(Command):
 
 	def execute(self) -> None:
 	    self.inputEditor.event_generate("<<Redo>>")
+
+class Invoker:
+	def setCommand(self, command:Command) -> None:
+		self.command = command
+
+	def executeCommand(self) -> None:
+		# if isinstance(self.command, CopyCommand):
+		self.command.execute()
+		
 
 root = Tk() 
 root.geometry("600x500")
