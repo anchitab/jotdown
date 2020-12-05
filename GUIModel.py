@@ -47,7 +47,9 @@ class GUIModel(Frame):
 		self.master.grid_columnconfigure(0, weight=1)  
 		
 		# To open new file 
-		self.GUIFileMenu.add_command(label="New", command=self.newFile)	 
+		# self.GUIFileMenu.add_command(label="New", command=self.newFile)
+		newFileCommand = NewFileCommand(self.inputeditor)
+		self.GUIFileMenu.add_command(label="New", command=newFileCommand.execute)		 
 		
 		# To open a already existing file 
 		self.GUIFileMenu.add_command(label="Open", command=self.openFile) 
@@ -90,11 +92,11 @@ class GUIModel(Frame):
 		self.GUIMenuBar.add_cascade(label="Display", menu=self.GUIDisplayMenu)
 		self.master.config(menu=self.GUIMenuBar)
 
-#		self.GUIScrollBar.pack(side=RIGHT,fill=Y)					 
-		
+		#		self.GUIScrollBar.pack(side=RIGHT,fill=Y)					 
 		# Scrollbar will adjust automatically according to the content		 
-#		self.GUIScrollBar.config(command=self.GUITextArea.yview)	 
-#		self.GUITextArea.config(yscrollcommand=self.GUIScrollBar.set) 
+		#		self.GUIScrollBar.config(command=self.GUITextArea.yview)	 
+		#		self.GUITextArea.config(yscrollcommand=self.GUIScrollBar.set) 
+		
 	def openAbout(self): 
 		showinfo("Jotdown","A minimal text editor for students, by students.") 
 
@@ -120,10 +122,10 @@ class GUIModel(Frame):
 
 			file.close() 
 	
-	def newFile(self): 
-		self.master.title("Untitled - Jotdown") 
-		self.file = None
-		self.inputeditor.delete(1.0,END)
+	# def newFile(self): 
+	# 	self.master.title("Untitled - Jotdown") 
+	# 	self.file = None
+	# 	self.inputeditor.delete(1.0,END)
 
 	def saveFile(self): 
 		
@@ -184,6 +186,16 @@ class GUIModel(Frame):
 class Command(GUIModel):
 	def execute(self) -> None:
 	    pass
+
+class NewFileCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+	    # self.inputEditor.event_generate("<<New>>")
+		self.master.title("Untitled - Jotdown") 
+		self.file = None
+		self.inputeditor.delete(1.0,END)
 
 class CopyCommand(Command):
 	def __init__(self, inputEditor: Text) -> None:
