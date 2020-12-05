@@ -10,6 +10,7 @@ from tkinter import messagebox as mbox
 from markdown2 import Markdown
 
 class View(Frame):
+    
     file = None
 
     def __init__(self, master=None):
@@ -75,7 +76,6 @@ class View(Frame):
 		# to give a feature of copy	 
         copyCommand = CopyCommand(self.inputeditor)
         self.GUIEditMenu.add_command(label="Copy", command=copyCommand.execute)
-		# self.GUIEditMenu.add_command(label = "Copy", command = invoker.executeCommand(copyCommand))	 
 		
 		# To give a feature of paste 
         pasteCommand = PasteCommand(self.inputeditor)
@@ -88,7 +88,7 @@ class View(Frame):
         self.GUIHelpMenu.add_command(label="About Jotdown", command=self.openAbout) 
         self.GUIMenuBar.add_cascade(label="Help", menu=self.GUIHelpMenu)
 
-        # TODO add night mode display here
+    # TODO add night mode display here
         self.master.config(menu=self.GUIMenuBar)
 
     def openAbout(self):
@@ -100,7 +100,6 @@ class View(Frame):
 
     def outputText(self, html):
         self.outputbox.set_html(html)
-
 
 class Model():  
 
@@ -114,14 +113,6 @@ class Model():
 class Command(View):
 	def execute(self) -> None:
 	    pass 
-
-# class Invoker:
-# 	def __init__(self, command:Command) -> None:
-# 		self.command = command
-
-# 	def executeCommand(self) -> None:
-# 		# if isinstance(self.command, CopyCommand):
-# 		self.command.execute()
 
 class OpenFileCommand(Command):
 	def __init__(self, inputEditor: Text) -> None:
@@ -236,4 +227,5 @@ root.geometry("600x500")
 view = View(root)
 model = Model()
 controller = Controller(view, model)
+
 root.mainloop()
