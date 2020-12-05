@@ -35,6 +35,9 @@ class View(Frame):
         markdownText = self.inputeditor.get("1.0", END)
         return markdownText
 
+    def outputText(self, html)
+        self.outputbox.set_html(html)
+
 class Model():   
     def onInputChange(self):
         self.md2html = Markdown()
@@ -50,7 +53,8 @@ class Controller():
         view.init_window(root)
         model.onInputChange()
         markdownText = view.getMarkdownText()
-        model.getHTML(markdownText)
+        html = model.getHTML(markdownText)
+        view.outputText(html)
 
 root = Tk()
 root.geometry("600x500")
