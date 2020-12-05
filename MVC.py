@@ -16,6 +16,7 @@ class View(Frame):
     def init_window(self, master = None):
         # Default window title when Jotdown opens
         Frame.__init__(self, master)
+        self.master = master
         self.master.title("Untitled - Jotdown")
         self.myfont = font.Font(family="Helvetica", size=14)
         self.pack(fill=BOTH, expand=1)
@@ -29,9 +30,6 @@ class View(Frame):
         self.outputbox.pack(fill = BOTH, expand = 1, side = RIGHT)
         self.outputbox.fit_height()
 
-    def inputText(self):
-        self.inputeditor.edit_modified(0)
-
     def getMarkdownText(self):
         markdownText = self.inputeditor.get("1.0", END)
         return markdownText
@@ -40,10 +38,10 @@ class View(Frame):
         self.outputbox.set_html(html)
 
 class Model():   
-    def onInputChange(self):
+    def __init__(self):
         self.md2html = Markdown()
     
-    def getHTML(self, markdownText):
+    def getHTML(self, markdownText:Text):
             html = self.md2html.convert(markdownText)
             return html
 
