@@ -18,10 +18,12 @@ class Model():
 class Controller():
     pass
 
+root = Tk()
+root.geometry("600x500")
 
 #Run main application
 view = View()
 model = Model()
 controller = Controller() 
 
-controller.mainloop()
+root.mainloop()
