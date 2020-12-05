@@ -16,7 +16,7 @@ from markdown2 import Markdown
 class GUIModel(Frame): 
 	# Adds vertical scrollbar 
 #	GUIScrollBar = Scrollbar(GUITextArea)	 
-#	file = None
+	file = None
 
 	def __init__(self, master=None):
 
@@ -174,7 +174,7 @@ class GUIModel(Frame):
 	# Turn on Night Mode
 	def night_mode(self):
 		main_color = "#292a31"
-		second_color = "#373737"
+		#second_color = "#373737"
 		text_color = "white"
 
 		self.inputeditor.config(bg=main_color, fg=text_color)
@@ -183,7 +183,7 @@ class GUIModel(Frame):
 	# Turn On Day Mode:
 	def day_mode(self):
 		main_color = "SystemButtonFace"
-		second_color = "SystemButtonFace"
+		#second_color = "SystemButtonFace"
 		text_color = "black"
 
 		root.config(bg=main_color)
