@@ -11,7 +11,10 @@ from markdown2 import Markdown
 
 class View(Frame):
     def init_window(self, master = None):
-        pass
+        #Default window title when Jotdown opens
+        Frame.__init__(self, master)
+        
+        self.myfont = font.Font(family="Helvetica", size=14)
 
 class Model():   
     pass
