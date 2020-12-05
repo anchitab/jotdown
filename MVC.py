@@ -9,14 +9,18 @@ from tkhtmlview import HTMLLabel
 from tkinter import messagebox as mbox
 from markdown2 import Markdown
 
-class View():
-    pass
+class View(Frame):
+    def init_window(self, master = None):
+        pass
 
 class Model():   
     pass
     
 class Controller():
-    pass
+    def __init__(self, view:View, model:Model) -> None:
+        self.model = model
+        self.view = view
+        view.init_window(root)
 
 root = Tk()
 root.geometry("600x500")
@@ -24,6 +28,6 @@ root.geometry("600x500")
 #Run main application
 view = View()
 model = Model()
-controller = Controller() 
+controller = Controller(view, model) 
 
 root.mainloop()
