@@ -21,7 +21,7 @@ class View(Frame):
         
     def init_window(self, master=None):
         # Default window title when Jotdown opens
-        self.master.title("Untitled - Jotdown") 
+        self.master.title("Untitled - Jotdown ✍️") 
         self.pack(fill=BOTH, expand=1)
         self.myfont = font.Font(family="Helvetica", size=14)
         
