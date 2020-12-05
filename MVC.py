@@ -17,3 +17,11 @@ class Model():
     
 class Controller():
     pass
+
+
+#Run main application
+view = View()
+model = Model()
+controller = Controller() 
+
+controller.mainloop()

@@ -1,5 +1,9 @@
 import tkinter 
-import os	 
+import os
+
+# from displayyyy import *
+# # from display import *
+
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import *
@@ -12,7 +16,7 @@ from markdown2 import Markdown
 class GUIModel(Frame): 
 	# Adds vertical scrollbar 
 #	GUIScrollBar = Scrollbar(GUITextArea)	 
-#	file = None
+	file = None
 
 	def __init__(self, master=None):
 
@@ -23,7 +27,7 @@ class GUIModel(Frame):
 
 	def init_window(self):
 		# Default window title when Jotdown opens		
-		self.master.title("Untitled - Jotdown")
+		self.master.title("Untitled - Jotdown ✍️")
 		self.pack(fill=BOTH, expand=1)
 		# Allow left side to take in text
 		self.inputeditor = Text(self, width="1", font=self.myfont, undo=True)
@@ -80,7 +84,7 @@ class GUIModel(Frame):
 
 		#Display Menu Bar Dropdown
 		self.GUIDisplayMenu.add_command(label="Nightmode 🌙", command=self.night_mode)
-		self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=self.copy)
+		self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=self.day_mode)
 		self.GUIMenuBar.add_cascade(label="Display", menu=self.GUIDisplayMenu)
 		self.master.config(menu=self.GUIMenuBar)
 
@@ -170,16 +174,16 @@ class GUIModel(Frame):
 	# Turn on Night Mode
 	def night_mode(self):
 		main_color = "#292a31"
-		second_color = "#373737"
+		#second_color = "#373737"
 		text_color = "white"
 
 		self.inputeditor.config(bg=main_color, fg=text_color)
 		self.outputbox.config(bg=main_color, fg=text_color)
 		
 	# Turn On Day Mode:
-	def day_mode():
+	def day_mode(self):
 		main_color = "SystemButtonFace"
-		second_color = "SystemButtonFace"
+		#second_color = "SystemButtonFace"
 		text_color = "black"
 
 		root.config(bg=main_color)
