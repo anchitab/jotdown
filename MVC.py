@@ -35,12 +35,17 @@ class Model():
     def onInputChange(self):
         self.md2html = Markdown()
     
+    def getHTML(self, markdownText):
+            html = self.md2html.convert(markdownText)
+            return html
+
 class Controller():
     def __init__(self, view:View, model:Model) -> None:
         self.model = model
         self.view = view
         view.init_window(root)
         model.onInputChange()
+        model.getHTML(markdownText)
 
 root = Tk()
 root.geometry("600x500")
