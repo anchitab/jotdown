@@ -25,7 +25,11 @@ class View(Frame):
         # Set outputbox on right side
         self.outputbox.pack(fill = BOTH, expand = 1, side = RIGHT)
         self.outputbox.fit_height()
-        
+        # Create event where 
+        self.inputeditor.bind("<<Modified>>", self.inputText)
+
+    def inputText(self):
+        self.inputeditor.edit_modified(0)
 
 class Model():   
     pass
