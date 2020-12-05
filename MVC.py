@@ -13,7 +13,7 @@ class View(Frame):
     def init_window(self, master = None):
         #Default window title when Jotdown opens
         Frame.__init__(self, master)
-        
+        self.master.title("Untitled - Jotdown")
         self.myfont = font.Font(family="Helvetica", size=14)
 
 class Model():   
