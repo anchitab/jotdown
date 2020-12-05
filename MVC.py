@@ -11,7 +11,7 @@ from markdown2 import Markdown
 
 class View(Frame):
     def __init__(self, master = None):
-        self,init_window(master)
+        self.init_window(master)
     
     def init_window(self, master = None):
         # Default window title when Jotdown opens
@@ -28,8 +28,6 @@ class View(Frame):
         # Set outputbox on right side
         self.outputbox.pack(fill = BOTH, expand = 1, side = RIGHT)
         self.outputbox.fit_height()
-        # Create event where 
-        self.inputeditor.bind("<<Modified>>", self.inputText)
 
     def inputText(self):
         self.inputeditor.edit_modified(0)
@@ -53,8 +51,10 @@ class Controller():
     def __init__(self, view:View, model:Model) -> None:
         self.model = model
         self.view = view
-        view.init_window(root)
-        model.onInputChange()
+        view.inputeditor.bind("<<Modified>>", self.processInputText)
+
+    def processInputText(self, event):
+        view.inputeditor.edit_modified(0)
         markdownText = view.getMarkdownText()
         html = model.getHTML(markdownText)
         view.outputText(html)
