@@ -12,8 +12,8 @@ from markdown2 import Markdown
 
 class GUIModel(Frame): 
 	# Adds vertical scrollbar 
-#	GUIScrollBar = Scrollbar(GUITextArea)	 
-#	file = None
+	# GUIScrollBar = Scrollbar(GUITextArea)	 
+	file = None
 
 	def __init__(self, master=None):
 
@@ -45,18 +45,20 @@ class GUIModel(Frame):
 		# Allow text to resize to window
 		self.master.grid_rowconfigure(0, weight=1) 
 		self.master.grid_columnconfigure(0, weight=1)  
-		
-		# To open new file 
-		# self.GUIFileMenu.add_command(label="New", command=self.newFile)
+
+		# To open new file  
 		newFileCommand = NewFileCommand(self.inputeditor)
-		self.GUIFileMenu.add_command(label="New", command=newFileCommand.execute)		 
+		self.GUIFileMenu.add_command(label="New", command=newFileCommand.execute)	
 		
 		# To open a already existing file 
-		self.GUIFileMenu.add_command(label="Open", command=self.openFile) 
+		openFileCommand = OpenFileCommand(self.inputeditor)
+		self.GUIFileMenu.add_command(label="Open", command=openFileCommand.execute)		
 		
-		# To save current file 
-		self.GUIFileMenu.add_command(label="Save", command=self.saveFile)	 
-		
+		# To save current file 	 
+		saveFileCommand = SaveFileCommand(self.inputeditor)
+		self.GUIFileMenu.add_command(label="Save", command=saveFileCommand.execute)	 
+
+		# To give a dropdown of File Menu
 		self.GUIMenuBar.add_cascade(label="File", menu=self.GUIFileMenu)	 
 
 		# To give a feature of undo 
@@ -79,7 +81,7 @@ class GUIModel(Frame):
 		pasteCommand = PasteCommand(self.inputeditor)
 		self.GUIEditMenu.add_command(label="Paste", command=pasteCommand.execute)		 
 		
-		# To give a feature of editing 
+		# To give a dropdown of Edit Menu
 		self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)	 
 		
 		# To create a feature of description of the notepad 
@@ -92,64 +94,13 @@ class GUIModel(Frame):
 		self.GUIMenuBar.add_cascade(label="Display", menu=self.GUIDisplayMenu)
 		self.master.config(menu=self.GUIMenuBar)
 
-		#		self.GUIScrollBar.pack(side=RIGHT,fill=Y)					 
+		# self.GUIScrollBar.pack(side=RIGHT,fill=Y)					 
 		# Scrollbar will adjust automatically according to the content		 
-		#		self.GUIScrollBar.config(command=self.GUITextArea.yview)	 
-		#		self.GUITextArea.config(yscrollcommand=self.GUIScrollBar.set) 
+		# self.GUIScrollBar.config(command=self.GUITextArea.yview)	 
+		# self.GUITextArea.config(yscrollcommand=self.GUIScrollBar.set) 
 		
 	def openAbout(self): 
 		showinfo("Jotdown","A minimal text editor for students, by students.") 
-
-	def openFile(self): 
-		
-		self.file = askopenfilename(defaultextension=".txt", filetypes=[("All Files","*.*"), ("Text Documents","*.txt")]) 
-
-		if self.file == "": 
-			
-			# if there is no file to open 
-			self.file = None
-		
-		else: 	
-
-			# Open the file 
-			# Change window title 
-			self.master.title(os.path.basename(self.file) + " - Jotdown") 
-			self.inputeditor.delete(1.0,END)
-
-			file = open(self.file,"r") 
-
-			self.inputeditor.insert(1.0,file.read())
-
-			file.close() 
-	
-	# def newFile(self): 
-	# 	self.master.title("Untitled - Jotdown") 
-	# 	self.file = None
-	# 	self.inputeditor.delete(1.0,END)
-
-	def saveFile(self): 
-		
-		if self.file == None: 
-			# Save as new file + name file
-			self.file = asksaveasfilename(initialfile='Untitled.txt', defaultextension=".txt", filetypes=[("All Files","*.*"), ("Text Documents","*.txt")]) 
-
-			if self.file == "": 
-				self.file = None
-			else: 
-				
-				# Save the file 
-				file = open(self.file,"w") 
-				file.write(self.inputeditor.get(1.0,END)) #
-				file.close() 
-				
-				# Set window title 
-				self.master.title(os.path.basename(self.file) + " - Jotdown") 
-		
-		# If file already named save using that name (does not ask for user input)	
-		else: 
-			file = open(self.file,"w") 
-			file.write(self.inputeditor.get(1.0,END))
-			file.close()  
 	
 
 # Convert the inputer text to markdown and output converted text to outputbox
@@ -185,7 +136,31 @@ class GUIModel(Frame):
 
 class Command(GUIModel):
 	def execute(self) -> None:
-	    pass
+	    pass 
+
+class OpenFileCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+		self.file = askopenfilename(defaultextension=".txt", filetypes=[("All Files","*.*"), ("Text Documents","*.txt")])
+		
+		if self.file == "": 
+			# if there is no file to open 
+			self.file = None
+		
+		else: 	
+
+			# Open the file 
+			# Change window title 
+			self.master.title(os.path.basename(self.file) + " - Jotdown") 
+			self.inputeditor.delete(1.0,END)
+
+			file = open(self.file,"r") 
+
+			self.inputeditor.insert(1.0,file.read())
+
+			file.close() 
 
 class NewFileCommand(Command):
 	def __init__(self, inputEditor: Text) -> None:
@@ -196,6 +171,32 @@ class NewFileCommand(Command):
 		self.master.title("Untitled - Jotdown") 
 		self.file = None
 		self.inputeditor.delete(1.0,END)
+
+class SaveFileCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+		if self.file == None: 
+			# Save as new file + name file
+			self.file = asksaveasfilename(initialfile='Untitled.txt', defaultextension=".txt", filetypes=[("All Files","*.*"), ("Text Documents","*.txt")]) 
+
+			if self.file == "": 
+				self.file = None
+			else: 
+				# Save the file 
+				file = open(self.file,"w") 
+				file.write(self.inputeditor.get(1.0,END)) 
+				file.close() 
+				
+				# Set window title 
+				self.master.title(os.path.basename(self.file) + " - Jotdown") 
+		
+		# If file already named save using that name (does not ask for user input)	
+		else: 
+			file = open(self.file,"w") 
+			file.write(self.inputeditor.get(1.0,END))
+			file.close()
 
 class CopyCommand(Command):
 	def __init__(self, inputEditor: Text) -> None:
