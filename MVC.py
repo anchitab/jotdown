@@ -16,6 +16,7 @@ class View(Frame):
         Frame.__init__(self, master)
         self.master = master  
         self.init_window(master)
+		# self.invoker = Invoker()
         
     def init_window(self, master=None):
         # Default window title when Jotdown opens
@@ -47,7 +48,6 @@ class View(Frame):
 		# To open new file  
         newFileCommand = NewFileCommand(self.inputeditor)
         self.GUIFileMenu.add_command(label="New", command=newFileCommand.execute)
-		# self.GUIFileMenu.add_command(label="New", command=callInvoker(newFileCommand))
 	
 		# To open a already existing file 
         openFileCommand = OpenFileCommand(self.inputeditor)
@@ -74,7 +74,8 @@ class View(Frame):
 		
 		# to give a feature of copy	 
         copyCommand = CopyCommand(self.inputeditor)
-        self.GUIEditMenu.add_command(label="Copy", command=copyCommand.execute)	 
+        self.GUIEditMenu.add_command(label="Copy", command=copyCommand.execute)
+		# self.GUIEditMenu.add_command(label = "Copy", command = invoker.executeCommand(copyCommand))	 
 		
 		# To give a feature of paste 
         pasteCommand = PasteCommand(self.inputeditor)
@@ -90,8 +91,6 @@ class View(Frame):
         # TODO add night mode display here
         self.master.config(menu=self.GUIMenuBar)
 
-        
-        # added new stuff till here
     def openAbout(self):
         showinfo("Jotdown","A minimal text editor for students, by students.") 
 
@@ -111,23 +110,18 @@ class Model():
     def getHTML(self, markdownText:Text):
         html = self.md2html.convert(markdownText)        
         return html
-    
-class Controller():
-
-    def __init__(self, view:View, model:Model) -> None:
-        self.model = model
-        self.view = view
-        view.inputeditor.bind("<<Modified>>", self.processInputText)
-
-    def processInputText(self, event):
-        view.inputeditor.edit_modified(0)
-        markdownText = view.getMarkdownText()
-        html = model.getHTML(markdownText)
-        view.outputText(html)
 
 class Command(View):
 	def execute(self) -> None:
 	    pass 
+
+# class Invoker:
+# 	def __init__(self, command:Command) -> None:
+# 		self.command = command
+
+# 	def executeCommand(self) -> None:
+# 		# if isinstance(self.command, CopyCommand):
+# 		self.command.execute()
 
 class OpenFileCommand(Command):
 	def __init__(self, inputEditor: Text) -> None:
@@ -141,7 +135,6 @@ class OpenFileCommand(Command):
 			self.file = None
 		
 		else: 	
-
 			# Open the file 
 			# Change window title 
 			self.master.title(os.path.basename(self.file) + " - Jotdown") 
@@ -222,6 +215,19 @@ class RedoCommand(Command):
 
 	def execute(self) -> None:
 	    self.inputEditor.event_generate("<<Redo>>")
+
+class Controller():
+	def __init__(self, view:View, model:Model) -> None:
+		self.model = model
+		self.view = view
+		# self.invoker = Invoker()
+		self.view.inputeditor.bind("<<Modified>>", self.processInputText)
+		
+	def processInputText(self, event):
+		view.inputeditor.edit_modified(0)
+		markdownText = view.getMarkdownText()
+		html = model.getHTML(markdownText)
+		view.outputText(html)
         
 root = Tk() 
 root.geometry("600x500") 
