@@ -18,6 +18,11 @@ class View(Frame):
         self.pack(fill=BOTH, expand=1)
         # Allow left side to take in text
         self.inputeditor = Text(self, width="1", font = self.myfont, undo = True)
+        # Set inputeditor on left side
+        self.inputeditor.pack(fill = BOTH, expand = 1, side = LEFT)
+        
+        # Set outputbox on right side
+        self.outputbox.pack(fill = BOTH, expand = 1, side = RIGHT)
         
 
 class Model():   
