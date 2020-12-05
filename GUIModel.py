@@ -1,5 +1,5 @@
 import tkinter 
-import os	 
+import os     
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import *
@@ -9,143 +9,123 @@ from tkhtmlview import HTMLLabel
 from tkinter import messagebox as mbox
 from markdown2 import Markdown
 
-# class Command(GUIModel):
-# 	def execute(self) -> None:
-# 	    pass 
+class View(Frame):
+    file = None
 
-class GUIModel(Frame): 
-	# Adds vertical scrollbar 
-	# GUIScrollBar = Scrollbar(GUITextArea)	 
-	file = None
+    def __init__(self, master=None):
+        Frame.__init__(self, master)
+        self.master = master  
+        self.init_window(master)
+        
+    def init_window(self, master=None):
+        # Default window title when Jotdown opens
+        self.master.title("Untitled - Jotdown") 
+        self.pack(fill=BOTH, expand=1)
+        self.myfont = font.Font(family="Helvetica", size=14)
+        
+        # Allow left side to take in text
+        self.inputeditor = Text(self, width="1", font=self.myfont, undo=True)
+        # Set inputeditor on left side
+        self.inputeditor.pack(fill=BOTH, expand=1, side=LEFT)
+        # Set outputbox to display text
+        self.outputbox = HTMLLabel(self, width="1", background="white", html="<h1> Welcome to Jotdown ✍️ </h1>")
+        # Set outputbox on right side
+        self.outputbox.pack(fill=BOTH, expand=1, side=RIGHT)
+        self.outputbox.fit_height()
 
-	def __init__(self, master=None):
-
-		Frame.__init__(self, master)
-		self.master = master
-		self.myfont = font.Font(family="Helvetica", size=14)
-		# self.invoker = Invoker()
-		self.init_window()
-
-	def init_window(self):
-		# Default window title when Jotdown opens		
-		self.master.title("Untitled - Jotdown")
-		self.pack(fill=BOTH, expand=1)
-		# Allow left side to take in text
-		self.inputeditor = Text(self, width="1", font=self.myfont, undo=True)
-		# Set inputeditor on left side
-		self.inputeditor.pack(fill=BOTH, expand=1, side=LEFT)
-		# Set outputbox to display text
-		self.outputbox = HTMLLabel(self, width="1", background="white", html="<h1> Welcome to Jotdown ✍️ </h1>")
-		# Set outputbox on right side
-		self.outputbox.pack(fill=BOTH, expand=1, side=RIGHT)
-		self.outputbox.fit_height()
-
-		self.inputeditor.bind("<<Modified>>", self.onInputChange)		
-		self.GUIMenuBar = Menu(self) 
-		self.GUIFileMenu = Menu(self.GUIMenuBar, tearoff=0) 
-		self.GUIEditMenu = Menu(self.GUIMenuBar, tearoff=0) 
-		self.GUIHelpMenu = Menu(self.GUIMenuBar, tearoff=0)
-		self.GUIDisplayMenu = Menu(self.GUIMenuBar, tearoff=0) 
-
-		self.master.title("Untitled - Jotdown") 
+        # added new stuff
+        self.GUIMenuBar = Menu(self)
+        self.GUIFileMenu = Menu(self.GUIMenuBar, tearoff=0)
+        self.GUIEditMenu = Menu(self.GUIMenuBar, tearoff=0)
+        self.GUIHelpMenu = Menu(self.GUIMenuBar, tearoff=0)
+        self.GUIDisplayMenu = Menu(self.GUIMenuBar, tearoff=0) 
 
 		# Allow text to resize to window
-		self.master.grid_rowconfigure(0, weight=1) 
-		self.master.grid_columnconfigure(0, weight=1)  
+        self.master.grid_rowconfigure(0, weight=1) 
+        self.master.grid_columnconfigure(0, weight=1)  
 
 		# To open new file  
-		newFileCommand = NewFileCommand(self.inputeditor)
-		self.GUIFileMenu.add_command(label="New", command=newFileCommand.execute)
+        newFileCommand = NewFileCommand(self.inputeditor)
+        self.GUIFileMenu.add_command(label="New", command=newFileCommand.execute)
 		# self.GUIFileMenu.add_command(label="New", command=callInvoker(newFileCommand))
 	
 		# To open a already existing file 
-		openFileCommand = OpenFileCommand(self.inputeditor)
-		self.GUIFileMenu.add_command(label="Open", command=openFileCommand.execute)		
+        openFileCommand = OpenFileCommand(self.inputeditor)
+        self.GUIFileMenu.add_command(label="Open", command=openFileCommand.execute)		
 		
 		# To save current file 	 
-		saveFileCommand = SaveFileCommand(self.inputeditor)
-		self.GUIFileMenu.add_command(label="Save", command=saveFileCommand.execute)	 
+        saveFileCommand = SaveFileCommand(self.inputeditor)
+        self.GUIFileMenu.add_command(label="Save", command=saveFileCommand.execute)	 
 
 		# To give a dropdown of File Menu
-		self.GUIMenuBar.add_cascade(label="File", menu=self.GUIFileMenu)	 
+        self.GUIMenuBar.add_cascade(label="File", menu=self.GUIFileMenu)	 
 
 		# To give a feature of undo 
-		undoCommand = UndoCommand(self.inputeditor)
-		self.GUIEditMenu.add_command(label="Undo", command=undoCommand.execute)	
+        undoCommand = UndoCommand(self.inputeditor)
+        self.GUIEditMenu.add_command(label="Undo", command=undoCommand.execute)	
 
 		# To give a feature of redo
-		redoCommand = RedoCommand(self.inputeditor) 
-		self.GUIEditMenu.add_command(label="Redo", command=redoCommand.execute)
+        redoCommand = RedoCommand(self.inputeditor) 
+        self.GUIEditMenu.add_command(label="Redo", command=redoCommand.execute)
 		
 		# To give a feature of cut 
-		cutCommand = CutCommand(self.inputeditor)
-		self.GUIEditMenu.add_command(label="Cut", command=cutCommand.execute)			 
+        cutCommand = CutCommand(self.inputeditor)
+        self.GUIEditMenu.add_command(label="Cut", command=cutCommand.execute)			 
 		
 		# to give a feature of copy	 
-		copyCommand = CopyCommand(self.inputeditor)
-		self.GUIEditMenu.add_command(label="Copy", command=copyCommand.execute)	 
+        copyCommand = CopyCommand(self.inputeditor)
+        self.GUIEditMenu.add_command(label="Copy", command=copyCommand.execute)	 
 		
 		# To give a feature of paste 
-		pasteCommand = PasteCommand(self.inputeditor)
-		self.GUIEditMenu.add_command(label="Paste", command=pasteCommand.execute)		 
+        pasteCommand = PasteCommand(self.inputeditor)
+        self.GUIEditMenu.add_command(label="Paste", command=pasteCommand.execute)		 
 		
 		# To give a dropdown of Edit Menu
-		self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)	 
-		
+        self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)	 
+        
 		# To create a feature of description of the notepad 
-		self.GUIHelpMenu.add_command(label="About Jotdown", command=self.openAbout) 
-		self.GUIMenuBar.add_cascade(label="Help", menu=self.GUIHelpMenu) 
+        self.GUIHelpMenu.add_command(label="About Jotdown", command=self.openAbout) 
+        self.GUIMenuBar.add_cascade(label="Help", menu=self.GUIHelpMenu)
 
-		#Display Menu Bar Dropdown
-		self.GUIDisplayMenu.add_command(label="Nightmode 🌙", command=self.night_mode)
-		self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=self.day_mode)
-		self.GUIMenuBar.add_cascade(label="Display", menu=self.GUIDisplayMenu)
-		self.master.config(menu=self.GUIMenuBar)
+        # TODO add night mode display here
+        self.master.config(menu=self.GUIMenuBar)
 
-		# self.GUIScrollBar.pack(side=RIGHT,fill=Y)					 
-		# Scrollbar will adjust automatically according to the content		 
-		# self.GUIScrollBar.config(command=self.GUITextArea.yview)	 
-		# self.GUITextArea.config(yscrollcommand=self.GUIScrollBar.set) 
-		# def callInvoker(self, command:Command):
-		# 	self.invoker.setCommand(command)
-		# 	self.invoker.executeCommand()
-		
-	def openAbout(self): 
-		showinfo("Jotdown","A minimal text editor for students, by students.") 
-	
+        
+        # added new stuff till here
+    def openAbout(self):
+        showinfo("Jotdown","A minimal text editor for students, by students.") 
 
-# Convert the inputer text to markdown and output converted text to outputbox
-	def onInputChange(self, event):
-		self.inputeditor.edit_modified(0)
-		md2html = Markdown()
-		markdownText = self.inputeditor.get("1.0", END)
-		html = md2html.convert(markdownText)
-		self.outputbox.set_html(html)	
+    def getMarkdownText(self):
+        markdownText = self.inputeditor.get("1.0", END)
+        return markdownText
 
-	# Turn on Night Mode
-	def night_mode(self):
-		main_color = "#292a31"
-		#second_color = "#373737"
-		text_color = "white"
+    def outputText(self, html):
+        self.outputbox.set_html(html)
 
-		self.inputeditor.config(bg=main_color, fg=text_color)
-		self.outputbox.config(bg=main_color, fg=text_color)
-		
-	# Turn On Day Mode:
-	def day_mode(self):
-		main_color = "SystemButtonFace"
-		#second_color = "SystemButtonFace"
-		text_color = "black"
 
-		root.config(bg=main_color)
-		self.GUIFileMenu.config(bg=main_color, fg=text_color)
-		self.GUIEditMenu.config(bg=main_color, fg=text_color)
-		self.GUIDisplayMenu.config(bg=main_color, fg=text_color)
-		self.GUIMenuBar.config(bg=main_color, fg=text_color)
-		self.inputeditor.config(bg=main_color, fg=text_color)
-		self.outputbox.config(bg=main_color, fg=text_color)
+class Model():  
 
-class Command(GUIModel):
+    def __init__(self):
+        self.md2html = Markdown()
+
+    def getHTML(self, markdownText:Text):
+        html = self.md2html.convert(markdownText)        
+        return html
+    
+class Controller():
+
+    def __init__(self, view:View, model:Model) -> None:
+        self.model = model
+        self.view = view
+        view.inputeditor.bind("<<Modified>>", self.processInputText)
+
+    def processInputText(self, event):
+        view.inputeditor.edit_modified(0)
+        markdownText = view.getMarkdownText()
+        html = model.getHTML(markdownText)
+        view.outputText(html)
+
+class Command(View):
 	def execute(self) -> None:
 	    pass 
 
@@ -242,25 +222,12 @@ class RedoCommand(Command):
 
 	def execute(self) -> None:
 	    self.inputEditor.event_generate("<<Redo>>")
-
-class Invoker:
-	def setCommand(self, command:Command) -> None:
-		self.command = command
-
-	def executeCommand(self) -> None:
-		# if isinstance(self.command, CopyCommand):
-		self.command.execute()
-		
-
+        
 root = Tk() 
-root.geometry("600x500")
+root.geometry("600x500") 
 
 # Run main application 
-Jotdown = GUIModel(root) 
-Jotdown.mainloop()
-
-
-
-
-
-
+view = View(root)
+model = Model()
+controller = Controller(view, model)
+root.mainloop()
