@@ -11,10 +11,13 @@ from markdown2 import Markdown
 
 class View(Frame):
     def init_window(self, master = None):
-        #Default window title when Jotdown opens
+        # Default window title when Jotdown opens
         Frame.__init__(self, master)
         self.master.title("Untitled - Jotdown")
         self.myfont = font.Font(family="Helvetica", size=14)
+        self.pack(fill=BOTH, expand=1)
+        # Allow left side to take in text
+        
 
 class Model():   
     pass
@@ -29,7 +32,7 @@ root = Tk()
 root.geometry("600x500")
 
 #Run main application
-view = View()
+view = View(root)
 model = Model()
 controller = Controller(view, model) 
 
