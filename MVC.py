@@ -32,13 +32,15 @@ class View(Frame):
         self.inputeditor.edit_modified(0)
 
 class Model():   
-    pass
+    def onInputChange(self):
+        self.md2html = Markdown()
     
 class Controller():
     def __init__(self, view:View, model:Model) -> None:
         self.model = model
         self.view = view
         view.init_window(root)
+        model.onInputChange()
 
 root = Tk()
 root.geometry("600x500")
