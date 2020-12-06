@@ -1,9 +1,6 @@
 import tkinter 
 import os 
 
-import MVC
-from MVC import View
-
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import *
@@ -13,7 +10,10 @@ from tkhtmlview import HTMLLabel
 from tkinter import messagebox as mbox
 from markdown2 import Markdown
 
-class Command(View):
+
+import MVC
+
+class Command(MVC.View):
 	def execute(self) -> None:
 	    pass 
 
