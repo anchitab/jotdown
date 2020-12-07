@@ -63,6 +63,11 @@ We chose the design pattern Memento to implement the undo feature into our proje
  Installations:
  - Python 3
  - Tkinter
+ 
+ Run the application:
+ ```
+ python3 MVC.py
+ ```
  ## Testing
  > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
  
