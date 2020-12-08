@@ -10,16 +10,18 @@ from tkhtmlview import HTMLLabel
 from tkinter import messagebox as mbox
 from markdown2 import Markdown
 
+class Command():
+	def __init__(self):
+		self.file = None
+	# 	self.master = None
 
-import MVC
-
-class Command(MVC.View):
 	def execute(self) -> None:
 	    pass 
 
 class OpenFileCommand(Command):
-	def __init__(self, inputEditor: Text) -> None:
+	def __init__(self, inputEditor: Text, master:Tk) -> None:
 		self.inputEditor = inputEditor
+		self.master = master
 
 	def execute(self) -> None:
 		self.file = askopenfilename(defaultextension=".txt", filetypes=[("All Files","*.*"), ("Text Documents","*.txt")])
@@ -33,11 +35,8 @@ class OpenFileCommand(Command):
 			# Change window title 
 			self.master.title(os.path.basename(self.file) + " - Jotdown") 
 			self.inputEditor.delete(1.0,END)
-
 			file = open(self.file,"r") 
-
 			self.inputEditor.insert(1.0,file.read())
-
 			file.close() 
 
 class NewFileCommand(Command):
@@ -50,8 +49,10 @@ class NewFileCommand(Command):
 		self.inputEditor.delete(1.0,END)
 
 class SaveFileCommand(Command):
-	def __init__(self, inputEditor: Text) -> None:
+	def __init__(self, inputEditor: Text, master:Tk) -> None:
 		self.inputEditor = inputEditor
+		self.master = master
+		self.file = None
 
 	def execute(self) -> None:
 		if self.file == None: 
@@ -71,6 +72,7 @@ class SaveFileCommand(Command):
 		
 		# If file already named save using that name (does not ask for user input)	
 		else: 
+			print("it came here")
 			file = open(self.file,"w") 
 			file.write(self.inputEditor.get(1.0,END))
 			file.close()
