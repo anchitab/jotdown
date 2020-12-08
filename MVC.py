@@ -119,7 +119,6 @@ class Controller():
 	def __init__(self, view:View, model:Model) -> None:
 		self.model = model
 		self.view = view
-		# self.invoker = Invoker()
 		self.view.inputeditor.bind("<<Modified>>", self.processInputText)
 		
 	def processInputText(self, event):
