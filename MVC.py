@@ -86,13 +86,18 @@ class View(Frame):
         self.GUIEditMenu.add_command(label="Paste", command=pasteCommand.execute)		 
 		
 		# To give a dropdown of Edit Menu
-        self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)	 
+        self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)
+
+        # To give a feature of night mode
+        self.GUIDisplayMenu.add_command(label="Nightmode 🌙", command=self.night_mode)
+       	 # To give a feature of day mode
+        self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=self.day_mode)
+       
         
 		# To create a feature of description of the notepad 
         self.GUIHelpMenu.add_command(label="About Jotdown", command=self.openAbout) 
         self.GUIMenuBar.add_cascade(label="Help", menu=self.GUIHelpMenu)
 
-    # TODO add night mode display here
         self.master.config(menu=self.GUIMenuBar)
 
     def openAbout(self):
