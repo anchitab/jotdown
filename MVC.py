@@ -92,7 +92,7 @@ class View(Frame):
         self.GUIDisplayMenu.add_command(label="Nightmode 🌙", command=self.night_mode)
        	 # To give a feature of day mode
         self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=self.day_mode)
-        # To give a dropdown of Edit Menu
+        # To give a dropdown of Display Menu
         self.GUIMenuBar.add_cascade(label="Display", menu=self.GUIDisplayMenu)
         
 		# To create a feature of description of the notepad 
