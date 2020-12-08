@@ -86,8 +86,12 @@ class View(Frame):
         self.GUIEditMenu.add_command(label="Paste", command=pasteCommand.execute)		 
 		
 		# To give a dropdown of Edit Menu
-        self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)	 
+		self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)	 
         
+		self.GUIDisplayMenu.add_command(label="Nightmode 🌙", command=self.night_mode)
+		self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=self.day_mode)
+
+
 		# To create a feature of description of the notepad 
         self.GUIHelpMenu.add_command(label="About Jotdown", command=self.openAbout) 
         self.GUIMenuBar.add_cascade(label="Help", menu=self.GUIHelpMenu)
@@ -114,12 +118,10 @@ class Model():
         html = self.md2html.convert(markdownText)        
         return html
 
-
 class Controller():
 	def __init__(self, view:View, model:Model) -> None:
 		self.model = model
 		self.view = view
-		# self.invoker = Invoker()
 		self.view.inputeditor.bind("<<Modified>>", self.processInputText)
 		
 	def processInputText(self, event):
@@ -127,7 +129,36 @@ class Controller():
 		markdownText = view.getMarkdownText()
 		html = model.getHTML(markdownText)
 		view.outputText(html)
-        
+
+class ThemeFactory():
+	def night_mode(self): pass
+	def day_mode(self): pass
+
+
+class NightThemeFactory(ThemeFactory):
+	# Turn on Night Mode
+	def night_mode(self):
+		main_color = "#292a31"
+		text_color = "white"
+
+		self.inputeditor.config(bg=main_color, fg=text_color)
+		self.outputbox.config(bg=main_color, fg=text_color)
+		
+
+class DayThemeFactory(ThemeFactory):
+	# Turn On Day Mode:
+	def day_mode(self):
+		main_color = "SystemButtonFace"
+		text_color = "black"
+
+		root.config(bg=main_color)
+		self.GUIFileMenu.config(bg=main_color, fg=text_color)
+		self.GUIEditMenu.config(bg=main_color, fg=text_color)
+		self.GUIDisplayMenu.config(bg=main_color, fg=text_color)
+		self.GUIMenuBar.config(bg=main_color, fg=text_color)
+		self.inputeditor.config(bg=main_color, fg=text_color)
+		self.outputbox.config(bg=main_color, fg=text_color)
+
 root = Tk() 
 root.geometry("600x500") 
 
