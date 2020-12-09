@@ -162,32 +162,6 @@ class NewFileCommand(Command):
 		self.file = None
 		self.inputEditor.delete(1.0,END)
 
-class SaveFileCommand(Command):
-	def __init__(self, inputEditor: Text) -> None:
-		self.inputEditor = inputEditor
-
-	def execute(self) -> None:
-		if self.file == None: 
-			# Save as new file + name file
-			self.file = asksaveasfilename(initialfile='Untitled.txt', defaultextension=".txt", filetypes=[("All Files","*.*"), ("Text Documents","*.txt")]) 
-
-			if self.file == "": 
-				self.file = None
-			else: 
-				# Save the file 
-				file = open(self.file,"w") 
-				file.write(self.inputEditor.get(1.0,END)) 
-				file.close() 
-				
-				# Set window title 
-				self.master.title(os.path.basename(self.file) + " - Jotdown") 
-		
-		# If file already named save using that name (does not ask for user input)	
-		else: 
-			file = open(self.file,"w") 
-			file.write(self.inputEditor.get(1.0,END))
-			file.close()
-
 class Controller():
 	def __init__(self, view:View, model:Model) -> None:
 		self.model = model
