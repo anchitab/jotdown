@@ -16,7 +16,11 @@ class ThemeFactory():
 
 
 class NightThemeFactory(ThemeFactory):
-	# Turn on Night Mode
+	def __init__(self, inputEditor:Text, outputbox: HTMLLABEL)
+        self.inputEditor = inputEditor
+        self.outputbox = outputbox
+
+    # Turn on Night Mode
 	def night_mode(self):
 		main_color = "#292a31"
 		text_color = "white"
@@ -26,7 +30,11 @@ class NightThemeFactory(ThemeFactory):
 		
 
 class DayThemeFactory(ThemeFactory):
-	# Turn On Day Mode:
+	def __init__(self, inputEditor:Text, outputbox: HTMLLABEL)
+        self.inputEditor = inputEditor
+        self.outputbox = outputbox
+    
+    # Turn On Day Mode:
 	def day_mode(self):
 		main_color = "SystemButtonFace"
 		text_color = "black"
