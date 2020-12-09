@@ -17,4 +17,13 @@ class ThemeCreator():
     def change_theme(self):
         pass
 
+class NightThemeFactory(ThemeCreator):
+    # Turn on Night Mode
+    def __init__(self, inputEditor:Text, outputbox: HTMLLabel):
+        self.inputEditor = inputEditor
+        self.outputbox = outputbox
+        
+
+    
+
 
