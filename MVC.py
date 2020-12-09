@@ -126,10 +126,6 @@ class Model():
         html = self.md2html.convert(markdownText)        
         return html
 
-class Command(View):
-	def execute(self) -> None:
-	    pass 
-
 class Controller():
 	def __init__(self, view:View, model:Model) -> None:
 		self.model = model
