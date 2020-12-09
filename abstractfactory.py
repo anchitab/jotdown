@@ -29,6 +29,12 @@ class NightThemeFactory(ThemeCreator):
         text_color = "white"
         self.inputEditor.config(bg=main_color, fg=text_color)
         self.outputbox.config(bg=main_color, fg=text_color)
+
+class DayThemeFactory(ThemeCreator):
+    def __init__(self, inputEditor:Text, outputbox: HTMLLabel):
+        self.inputEditor = inputEditor
+        self.outputbox = outputbox
+        self.change_theme()
         
 
 
