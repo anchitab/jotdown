@@ -1,10 +1,5 @@
 import tkinter 
-import os 
-
-# import command
-from command import *
-from factory import *
-
+import os     
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import *
@@ -20,13 +15,13 @@ class View(Frame):
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
-        self.master = master
+        self.master = master  
         self.init_window(master)
 		# self.invoker = Invoker()
         
     def init_window(self, master=None):
         # Default window title when Jotdown opens
-        self.master.title("Untitled - Jotdown ✍️") 
+        self.master.title("Untitled - Jotdown") 
         self.pack(fill=BOTH, expand=1)
         self.myfont = font.Font(family="Helvetica", size=14)
         
@@ -56,11 +51,11 @@ class View(Frame):
         self.GUIFileMenu.add_command(label="New", command=newFileCommand.execute)
 	
 		# To open a already existing file 
-        openFileCommand = OpenFileCommand(self.inputeditor, master)
+        openFileCommand = OpenFileCommand(self.inputeditor)
         self.GUIFileMenu.add_command(label="Open", command=openFileCommand.execute)		
 		
 		# To save current file 	 
-        saveFileCommand = SaveFileCommand(self.inputeditor, master)
+        saveFileCommand = SaveFileCommand(self.inputeditor)
         self.GUIFileMenu.add_command(label="Save", command=saveFileCommand.execute)	 
 
 		# To give a dropdown of File Menu
@@ -87,27 +82,13 @@ class View(Frame):
         self.GUIEditMenu.add_command(label="Paste", command=pasteCommand.execute)		 
 		
 		# To give a dropdown of Edit Menu
-        self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)
-
-        # To give a feature of night mode
-        changeTheme = themeFactory(self.inputeditor, self.outputbox)
-        self.GUIDisplayMenu.add_command(label="Nightmode 🌙", command=changeTheme.getTheme("NightMode"))
-       	 # To give a feature of day mode
-        changeTheme2 = themeFactory(self.inputeditor, self.outputbox) 
-        self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=changeTheme2.getTheme("DayMode"))
-
-        # # To give a feature of night mode
-        # self.GUIDisplayMenu.add_command(label="Nightmode 🌙", command=self.night_mode)
-       	#  # To give a feature of day mode
-        # self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=self.day_mode)
-
-        # To give a dropdown of Display Menu
-        self.GUIMenuBar.add_cascade(label="Display", menu=self.GUIDisplayMenu)
+        self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)	 
         
 		# To create a feature of description of the notepad 
         self.GUIHelpMenu.add_command(label="About Jotdown", command=self.openAbout) 
         self.GUIMenuBar.add_cascade(label="Help", menu=self.GUIHelpMenu)
 
+    # TODO add night mode display here
         self.master.config(menu=self.GUIMenuBar)
 
     def openAbout(self):
@@ -120,19 +101,6 @@ class View(Frame):
     def outputText(self, html):
         self.outputbox.set_html(html)
 
-    # def night_mode(self):
-    #     main_color = "#292a31"
-    #     text_color = "white"
-    #     self.inputeditor.config(bg=main_color, fg=text_color)
-    #     self.outputbox.config(bg=main_color, fg=text_color)
-
-    # def day_mode(self):
-    #     main_color = "SystemButtonFace"
-    #     text_color = "black"
-        
-    #     self.inputeditor.config(bg=main_color, fg=text_color)
-    #     self.outputbox.config(bg=main_color, fg=text_color)
-
 class Model():  
 
     def __init__(self):
@@ -142,11 +110,108 @@ class Model():
         html = self.md2html.convert(markdownText)        
         return html
 
+class Command(View):
+	def execute(self) -> None:
+	    pass 
+
+class OpenFileCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+		self.file = askopenfilename(defaultextension=".txt", filetypes=[("All Files","*.*"), ("Text Documents","*.txt")])
+		
+		if self.file == "": 
+			# if there is no file to open 
+			self.file = None
+		
+		else: 	
+			# Open the file 
+			# Change window title 
+			self.master.title(os.path.basename(self.file) + " - Jotdown") 
+			self.inputEditor.delete(1.0,END)
+
+			file = open(self.file,"r") 
+
+			self.inputEditor.insert(1.0,file.read())
+
+			file.close() 
+
+class NewFileCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+		# print("reachednewfile")
+		self.file = None
+		self.inputEditor.delete(1.0,END)
+
+class SaveFileCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+		if self.file == None: 
+			# Save as new file + name file
+			self.file = asksaveasfilename(initialfile='Untitled.txt', defaultextension=".txt", filetypes=[("All Files","*.*"), ("Text Documents","*.txt")]) 
+
+			if self.file == "": 
+				self.file = None
+			else: 
+				# Save the file 
+				file = open(self.file,"w") 
+				file.write(self.inputEditor.get(1.0,END)) 
+				file.close() 
+				
+				# Set window title 
+				self.master.title(os.path.basename(self.file) + " - Jotdown") 
+		
+		# If file already named save using that name (does not ask for user input)	
+		else: 
+			file = open(self.file,"w") 
+			file.write(self.inputEditor.get(1.0,END))
+			file.close()
+
+class CopyCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+	    self.inputEditor.event_generate("<<Copy>>")
+
+class CutCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+	    self.inputEditor.event_generate("<<Cut>>")
+
+class PasteCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+	    self.inputEditor.event_generate("<<Paste>>")
+
+class UndoCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+	    self.inputEditor.event_generate("<<Undo>>")
+
+class RedoCommand(Command):
+	def __init__(self, inputEditor: Text) -> None:
+		self.inputEditor = inputEditor
+
+	def execute(self) -> None:
+	    self.inputEditor.event_generate("<<Redo>>")
 
 class Controller():
 	def __init__(self, view:View, model:Model) -> None:
 		self.model = model
 		self.view = view
+		# self.invoker = Invoker()
 		self.view.inputeditor.bind("<<Modified>>", self.processInputText)
 		
 	def processInputText(self, event):
@@ -154,7 +219,7 @@ class Controller():
 		markdownText = view.getMarkdownText()
 		html = model.getHTML(markdownText)
 		view.outputText(html)
-
+        
 root = Tk() 
 root.geometry("600x500") 
 
