@@ -153,15 +153,6 @@ class OpenFileCommand(Command):
 
 			file.close() 
 
-class NewFileCommand(Command):
-	def __init__(self, inputEditor: Text) -> None:
-		self.inputEditor = inputEditor
-
-	def execute(self) -> None:
-		# print("reachednewfile")
-		self.file = None
-		self.inputEditor.delete(1.0,END)
-
 class Controller():
 	def __init__(self, view:View, model:Model) -> None:
 		self.model = model
