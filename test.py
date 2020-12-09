@@ -25,7 +25,6 @@ class TestInput(unittest.TestCase):
         testString = '**hi crocodile**'
         # self.view = View()
         boldString = HTMLLabel(text='hi crocodile', font='bold')
-
         test = model.getHTML(testString)
         self.assertEqual(test, boldString)
 
