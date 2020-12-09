@@ -48,4 +48,8 @@ class ThemeFactory():
         self.inputEditor = inputEditor
         self.outputbox = outputbox
 
+    def getDayTheme(self):       
+        print("return day theme")
+        return DayThemeFactory(self.inputEditor, self.outputbox)
+
 
