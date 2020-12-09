@@ -188,13 +188,6 @@ class SaveFileCommand(Command):
 			file.write(self.inputEditor.get(1.0,END))
 			file.close()
 
-class CopyCommand(Command):
-	def __init__(self, inputEditor: Text) -> None:
-		self.inputEditor = inputEditor
-
-	def execute(self) -> None:
-	    self.inputEditor.event_generate("<<Copy>>")
-
 class Controller():
 	def __init__(self, view:View, model:Model) -> None:
 		self.model = model
