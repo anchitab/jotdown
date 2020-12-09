@@ -2,7 +2,7 @@ import tkinter
 import os 
 
 from command import *
-from abstractfactory import *
+from factory import *
 
 from tkinter import *
 from tkinter.messagebox import *
