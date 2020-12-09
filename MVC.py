@@ -1,8 +1,8 @@
 import tkinter 
 import os 
 
-# import command
 from command import *
+from abstractfactory import *
 
 from tkinter import *
 from tkinter.messagebox import *
@@ -88,10 +88,10 @@ class View(Frame):
 		# To give a dropdown of Edit Menu
         self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)
 
-        # To give a feature of night mode
-        self.GUIDisplayMenu.add_command(label="Nightmode 🌙", command=self.night_mode)
-       	 # To give a feature of day mode
-        self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=self.day_mode)
+        #creates ThemeFactory object
+        themeFactory = ThemeFactory(self.inputeditor, self.outputbox)
+       	
+
         # To give a dropdown of Display Menu
         self.GUIMenuBar.add_cascade(label="Display", menu=self.GUIDisplayMenu)
         
@@ -132,7 +132,7 @@ class Controller():
 		markdownText = view.getMarkdownText()
 		html = model.getHTML(markdownText)
 		view.outputText(html)
-        
+
 root = Tk() 
 root.geometry("600x500") 
 
