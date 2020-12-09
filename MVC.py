@@ -130,29 +130,6 @@ class Command(View):
 	def execute(self) -> None:
 	    pass 
 
-class OpenFileCommand(Command):
-	def __init__(self, inputEditor: Text) -> None:
-		self.inputEditor = inputEditor
-
-	def execute(self) -> None:
-		self.file = askopenfilename(defaultextension=".txt", filetypes=[("All Files","*.*"), ("Text Documents","*.txt")])
-		
-		if self.file == "": 
-			# if there is no file to open 
-			self.file = None
-		
-		else: 	
-			# Open the file 
-			# Change window title 
-			self.master.title(os.path.basename(self.file) + " - Jotdown") 
-			self.inputEditor.delete(1.0,END)
-
-			file = open(self.file,"r") 
-
-			self.inputEditor.insert(1.0,file.read())
-
-			file.close() 
-
 class Controller():
 	def __init__(self, view:View, model:Model) -> None:
 		self.model = model
