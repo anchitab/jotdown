@@ -8,7 +8,6 @@ from tkinter.filedialog import *
 from tkinter import font, filedialog
 from tkhtmlview import HTMLLabel
 
-<<<<<<< HEAD
 from tkinter import messagebox as mbox
 from markdown2 import Markdown
 
