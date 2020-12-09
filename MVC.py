@@ -216,13 +216,6 @@ class UndoCommand(Command):
 	def execute(self) -> None:
 	    self.inputEditor.event_generate("<<Undo>>")
 
-class RedoCommand(Command):
-	def __init__(self, inputEditor: Text) -> None:
-		self.inputEditor = inputEditor
-
-	def execute(self) -> None:
-	    self.inputEditor.event_generate("<<Redo>>")
-
 class Controller():
 	def __init__(self, view:View, model:Model) -> None:
 		self.model = model
@@ -234,7 +227,6 @@ class Controller():
 		markdownText = view.getMarkdownText()
 		html = model.getHTML(markdownText)
 		view.outputText(html)
-
 
 # Run main application 
 view = View(root)
