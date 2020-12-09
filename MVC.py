@@ -202,13 +202,6 @@ class CutCommand(Command):
 	def execute(self) -> None:
 	    self.inputEditor.event_generate("<<Cut>>")
 
-class PasteCommand(Command):
-	def __init__(self, inputEditor: Text) -> None:
-		self.inputEditor = inputEditor
-
-	def execute(self) -> None:
-	    self.inputEditor.event_generate("<<Paste>>")
-
 class Controller():
 	def __init__(self, view:View, model:Model) -> None:
 		self.model = model
