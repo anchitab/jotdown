@@ -36,5 +36,13 @@ class DayThemeFactory(ThemeCreator):
         self.outputbox = outputbox
         self.change_theme()
         
+    # Turn On Day Mode:
+    def change_theme(self):
+        main_color = "SystemButtonFace"
+        text_color = "black"
+        self.inputEditor.config(bg=main_color, fg=text_color)
+        self.outputbox.config(bg=main_color, fg=text_color)
+
+
 
 
