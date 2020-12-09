@@ -106,4 +106,3 @@ class themeFactory():
             raise AssertionError("Theme not found")
         except AssertionError as _e:
             print(_e)
->>>>>>> 24d100bab2b5949c96fe843a9fcec2aa6cb230ef
