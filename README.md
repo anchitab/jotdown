@@ -65,6 +65,7 @@ We chose the design pattern Memento to implement the undo feature into our proje
  Installations:
  - Python 3
  - Tkinter
+ - Updated pip3
  
  Run the application:
  ```
