@@ -13,6 +13,9 @@ from tkhtmlview import HTMLLabel
 from tkinter import messagebox as mbox
 from markdown2 import Markdown
 
+root = Tk() 
+root.geometry("600x500") 
+
 class View(Frame):
     
     file = None
@@ -232,8 +235,6 @@ class Controller():
 		html = model.getHTML(markdownText)
 		view.outputText(html)
 
-root = Tk() 
-root.geometry("600x500") 
 
 # Run main application 
 view = View(root)
