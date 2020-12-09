@@ -52,4 +52,8 @@ class ThemeFactory():
         print("return day theme")
         return DayThemeFactory(self.inputEditor, self.outputbox)
 
+    def getNightTheme(self):       
+        print("return night theme")
+        return NightThemeFactory(self.inputEditor, self.outputbox)
+
 
