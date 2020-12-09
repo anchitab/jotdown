@@ -1,11 +1,7 @@
 import tkinter 
-<<<<<<< HEAD
 import os 
 
-=======
-import os
 from GUIModel import *
->>>>>>> 24d100bab2b5949c96fe843a9fcec2aa6cb230ef
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import *
