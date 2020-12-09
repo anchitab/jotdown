@@ -15,12 +15,6 @@ from MVC import *
 
 class TestInput(unittest.TestCase):
 
-    #  def test(self, view:View):
-    #     testString = "hi crocodile"
-    #     # self.view = View()
-    #     test = view.inputeditor(testString)
-    #     self.assertEqual(test,"hi crocodile")
-
     def testBold(self):
         testString = '**hi crocodile**'
         # self.view = View()
@@ -28,8 +22,6 @@ class TestInput(unittest.TestCase):
         test = model.getHTML(testString)
         self.assertEqual(test, boldString)
 
-# root = Tk()
-# view = View(root)
 
 if __name__ == '__main__':
     model = Model()
