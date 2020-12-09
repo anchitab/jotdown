@@ -1,5 +1,9 @@
 import tkinter 
-import os     
+import os 
+
+from command import *
+from abstractfactory import *
+
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import *
@@ -82,13 +86,22 @@ class View(Frame):
         self.GUIEditMenu.add_command(label="Paste", command=pasteCommand.execute)		 
 		
 		# To give a dropdown of Edit Menu
-        self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)	 
+        self.GUIMenuBar.add_cascade(label="Edit", menu=self.GUIEditMenu)
+
+        #creates ThemeFactory object
+        themeFactory = ThemeFactory(self.inputeditor, self.outputbox)
+       	# To give a feature of day mode
+        self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=themeFactory.getDayTheme)
+        # To give a feature of night mode
+        self.GUIDisplayMenu.add_command(label="Nightmode 🌙", command=themeFactory.getNightTheme)
+
+        # To give a dropdown of Display Menu
+        self.GUIMenuBar.add_cascade(label="Display", menu=self.GUIDisplayMenu)
         
 		# To create a feature of description of the notepad 
         self.GUIHelpMenu.add_command(label="About Jotdown", command=self.openAbout) 
         self.GUIMenuBar.add_cascade(label="Help", menu=self.GUIHelpMenu)
 
-    # TODO add night mode display here
         self.master.config(menu=self.GUIMenuBar)
 
     def openAbout(self):
@@ -211,7 +224,6 @@ class Controller():
 	def __init__(self, view:View, model:Model) -> None:
 		self.model = model
 		self.view = view
-		# self.invoker = Invoker()
 		self.view.inputeditor.bind("<<Modified>>", self.processInputText)
 		
 	def processInputText(self, event):
@@ -219,7 +231,7 @@ class Controller():
 		markdownText = view.getMarkdownText()
 		html = model.getHTML(markdownText)
 		view.outputText(html)
-        
+
 root = Tk() 
 root.geometry("600x500") 
 
