@@ -41,3 +41,8 @@ class DayThemeFactory(ThemeFactory):
 
         self.inputeditor.config(bg=main_color, fg=text_color)
 		self.outputbox.config(bg=main_color, fg=text_color)
+
+class themeFactory():
+	def __init__(self, inputEditor:Text, outputbox: HTMLLABEL)
+        self.inputEditor = inputEditor
+        self.outputbox = outputbox
