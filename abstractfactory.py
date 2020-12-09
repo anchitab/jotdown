@@ -22,8 +22,13 @@ class NightThemeFactory(ThemeCreator):
     def __init__(self, inputEditor:Text, outputbox: HTMLLabel):
         self.inputEditor = inputEditor
         self.outputbox = outputbox
-        
+        self.change_theme()
 
-    
+    def change_theme(self):
+        main_color = "#292a31"
+        text_color = "white"
+        self.inputEditor.config(bg=main_color, fg=text_color)
+        self.outputbox.config(bg=main_color, fg=text_color)
+        
 
 
