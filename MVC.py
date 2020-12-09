@@ -58,11 +58,11 @@ class View(Frame):
         self.GUIFileMenu.add_command(label="New", command=newFileCommand.execute)
 	
 		# To open a already existing file 
-        openFileCommand = OpenFileCommand(self.inputeditor)
+        openFileCommand = OpenFileCommand(self.inputeditor, master)
         self.GUIFileMenu.add_command(label="Open", command=openFileCommand.execute)		
 		
 		# To save current file 	 
-        saveFileCommand = SaveFileCommand(self.inputeditor)
+        saveFileCommand = SaveFileCommand(self.inputeditor, master)
         self.GUIFileMenu.add_command(label="Save", command=saveFileCommand.execute)	 
 
 		# To give a dropdown of File Menu
