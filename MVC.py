@@ -90,7 +90,9 @@ class View(Frame):
 
         #creates ThemeFactory object
         themeFactory = ThemeFactory(self.inputeditor, self.outputbox)
-       	
+       	 # To give a feature of day mode
+        self.GUIDisplayMenu.add_command(label="Daymode ☀️", command=themeFactory.getDayTheme)
+    
 
         # To give a dropdown of Display Menu
         self.GUIMenuBar.add_cascade(label="Display", menu=self.GUIDisplayMenu)
