@@ -137,8 +137,8 @@ class Controller():
 		markdownText = view.getMarkdownText()
 		html = model.getHTML(markdownText)
 		view.outputText(html)
-
-# Run main application 
+		
+# Run main application
 view = View(root)
 model = Model()
 controller = Controller(view, model)
