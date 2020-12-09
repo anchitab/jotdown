@@ -46,3 +46,14 @@ class themeFactory():
 	def __init__(self, inputEditor:Text, outputbox: HTMLLABEL)
         self.inputEditor = inputEditor
         self.outputbox = outputbox
+
+    #staticmethod
+    def getTheme(self, themeType):
+        try:
+            if themeType == "NightMode":
+                return NightThemeFactory(self.inputEditor, self.outputbox)
+            if themeType == "DayMode":
+                return DayThemeFactory(self.inputEditor, self.outputbox)
+            raise AssertionError("Theme not found")
+        except AssertionError as _e:
+            print(_e)
