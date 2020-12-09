@@ -7,8 +7,11 @@ from tkinter.filedialog import *
 from tkinter import font, filedialog
 from tkhtmlview import HTMLLabel
 
+from abc import ABCMeta, abstractmethod
+
 class ThemeFactory():
-	def night_mode(self): pass
+	@abstractstaticmethod
+    def night_mode(self): pass
 	def day_mode(self): pass
 
 
