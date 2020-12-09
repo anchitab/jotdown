@@ -56,7 +56,6 @@ class ThemeFactory():
         return NightThemeFactory(self.inputEditor, self.outputbox)
 
 
-=======
 from abc import ABCMeta, abstractmethod
 
 class ThemeFactory():
