@@ -24,7 +24,6 @@ class View(Frame):
         Frame.__init__(self, master)
         self.master = master  
         self.init_window(master)
-		# self.invoker = Invoker()
         
     def init_window(self, master=None):
         # Default window title when Jotdown opens
@@ -133,10 +132,10 @@ class Controller():
 		self.view.inputeditor.bind("<<Modified>>", self.processInputText)
 		
 	def processInputText(self, event):
-		view.inputeditor.edit_modified(0)
-		markdownText = view.getMarkdownText()
-		html = model.getHTML(markdownText)
-		view.outputText(html)
+		self.view.inputeditor.edit_modified(0)
+		markdownText = self.view.getMarkdownText()
+		html = self.model.getHTML(markdownText)
+		self.view.outputText(html)
 
 # Run main application 
 view = View(root)
