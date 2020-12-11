@@ -56,6 +56,13 @@ class TestInputEditor(TKinterTestCase):
         self.pump_events()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
+    def test_Num_Input(self):
+        inputString = '123'
+        self.pump_events()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pump_events()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
+
 
 class TestInput(TKinterTestCase):
 
