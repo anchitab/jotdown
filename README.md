@@ -18,15 +18,15 @@
      * The input will be text that users put into the document and the output is the properly formatted text in alliance to Markdown syntax. 
 
   * What are the three design patterns you will be using?
-    ### Pattern 1: Memento 
-    #### Features: Undo, Cursor, Scroll Text, Edit History
-    * Memento enables developers to work on the previous state of objects in the program. This allows features such as undo and edit history to be created as this design pattern can both save and restore the state of its objects. In our project, we plan to implement features such as the scroll position, undo button, cursors coordinates, and edit history. As Memento doesn’t alter the internal structure of the objects, a lot of these features can be created using this design pattern.
-    ### Pattern 2: Composite 
+    ### Pattern 1: MVC
     #### Features: GUI
-    * Composite enables developers to organize objects into tree structures and navigate these trees as individual objects.  In our program, the user will be able to interact with our project through a GUI or Graphical User Interface. This design pattern allows us to integrate new elements without breaking the previous code. This pattern reduces technical debt as you do not need to use concrete classes or objects since complex and simple elements are all treated uniformly. 
-    ### Pattern 3: Abstract Factory
-    #### Features: Copy/Paste, Search/Replace, Night Mode Customization 
-    * The Abstract Factory Design Pattern essentially helps create families of objects that are related to each other without needing to name their concrete classes. In our program, we hope to implement features such as the ability to customize screen preference, copy/paste function, and enable users to search and replace. This design pattern allows us to integrate new elements without breaking the previous code.
+    * The Model-View-Controller design pattern enables developers to work on creating an user interface by splitting the logic into the three interconnected classes. This allows the separation of our implementation to selectively choose where the user can input and view information and how the program processes it. In our project, we plan to use this class to implement the GUI (Graphical User Interface) and implement its different aspects in their respective classes.
+    ### Pattern 2: Factory Method
+    #### Features: Night Mode/Day Mode Customization 
+    * The Factory Method design pattern essentially helps create an interface as a superclass and its respective subclasses which have the ability to change the type of the subclasses. In our program, we used this design pattern to implement a feature that gives the user the ability to switch between night mode and day mode. By creating different products for night mode and day mode, factory method can help us distinguish how the same type of objects are implemented differently in their individual classes.
+    ### Pattern 3: Command
+    #### Features: MenuBar(Copy, Cut, Paste, Undo, Redo, Save, Open, New File)
+    * The Command design pattern allows developers to parameterize the different features we intend for it to execute. Using Command gives us the ability to call the same execute method with different sender requests and organize the function executions. We have implemented commands such as Copy, Undo, Save File and many more to enable users to use the GUI efficiently and save their work for later access.
 
 
 ## Phase II
@@ -38,14 +38,14 @@ Our Model, View, and Controller Diagram was used to showcase how we plan to desi
 
 <img src = "MVC.png">
 
-### Factory Diagram 
-We chose this design pattern for our night-shift mode and day-shift modes. The reasoning behind this decision is that this design pattern allows us to create families of related objects without the need to create concrete classes.  In our diagram, our family or explicit interface is “Theme”, and its variants are “DayTheme” and “NightTheme”. Then, we have declared our Abstract Factory as “ThemeFactory”, with creation methods of createMenuBar, createButtons, etc. Then we have our variants as discussed above and their respective creational methods. Below these, we have our Abstract and Concrete  Products. 
+### Factory Method Diagram 
+We chose this design pattern for our night-shift mode and day-shift modes. The reasoning behind this decision is that this design pattern allows us to create families of related objects without the need to create concrete classes.  In our diagram, our family or explicit interface is “Theme”, and its variants are “DayTheme” and “NightTheme”. Then, we have declared our Abstract Factory as “ThemeFactory” and have our variants as discussed above and their respective creational methods.
 
 <img src = "Factory.png">
 
 ### Command Diagram 
 
-We chose the design pattern Memento to implement the undo feature into our project.  The Originator class creates a “state” by taking a snapshot of its current state, which additionally allows it to restore to previous states. The memento class is the value that behaves as the aforementioned snapshot of the state. Finally, the Caretaker class manages when the snapshots should be taken as when it should be restored (the undo function).
+We chose the design pattern Command to implement the menubar feature into our project.  The overarching Command class implements several Concrete Commands such as Cut, Copy, Paste, Undo and Redo under the Edit Menu. The user can also access features such as Save File, New File, and Open File under the File category on the Menu Bar. The Invoker is the one that sets the commands to be called and executes them in our MVC file, while the Receiver class is optional to carry out the logic behind the concrete commands.
 
 <img src = "Command.png">
  
