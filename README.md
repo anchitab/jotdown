@@ -66,9 +66,9 @@ We chose the design pattern Command to implement the menubar feature into our pr
  > Instructions on installing and running your application
  
  Installations:
- - Python 3
- - Tkinter
- - Updated pip3
+ - [Python 3](https://www.python.org/download/releases/3.0/)
+ - [Tkinter](https://docs.python.org/3/library/tkinter.html)
+ - [Updated pip3](https://pip.pypa.io/en/stable/)
  
  Run the application:
  ```
