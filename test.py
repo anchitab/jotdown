@@ -19,14 +19,14 @@ class TKinterTestCase(unittest.TestCase):
         self.view = MVC.View(self.root)
         self.model = MVC.Model()
         self.controller = MVC.Controller(self.view, self.model)
-        self.pump_events()
+        self.pumpEvents()
 
     def tearDown(self):
         if self.root:
             self.root.destroy()
-            self.pump_events()
+            self.pumpEvents()
 
-    def pump_events(self):
+    def pumpEvents(self):
         while self.root.dooneevent(tkinter._tkinter.DONT_WAIT):
             pass
 
@@ -35,46 +35,60 @@ class TestInputEditor(TKinterTestCase):
     
     def test_Input(self):
         inputString = 'hi crocodile' + '\n'
-        self.pump_events()
+        self.pumpEvents()
         self.view.inputeditor.insert('1.0', inputString)
-        self.pump_events()
+        self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
     def test_Num_Input(self):
         inputString = '123'
-        self.pump_events()
+        self.pumpEvents()
         self.view.inputeditor.insert('1.0', inputString)
-        self.pump_events()
+        self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
 
     def test_Word_Input(self):
         inputString = 'test'
-        self.pump_events()
+        self.pumpEvents()
         self.view.inputeditor.insert('1.0', inputString)
-        self.pump_events()
+        self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
 
-    # def test_Indent_Input(self):
-    #     inputString = '    test'
-    #     self.pump_events()
-    #     self.view.inputeditor.insert('1.0', inputString)
-    #     self.pump_events()
-    #     self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
+    def test_StringandInt_Input(self):
+        inputString = 'hi 123 crocodiles' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
-#     def test_Space_Input(self):
-#         inputString = ' '
-#         self.pump_events()
-#         self.view.inputeditor.insert('1.0', inputString)
-#         self.pump_events()
-#         self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')    
+    def test_Special_Characters_Input(self):
+        inputString = '!?~' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
+
+    def test_All_Types_Input(self):
+        inputString = 'hello 123 crocodiles!' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
+
+    def test_decimals_Input(self):
+        inputString = '3.1415' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
 class TestOutputBox(TKinterTestCase):
     
     def test_Initial_Output(self):
         inputString = 'Welcome to Jotdown ✍️' + '\n'
-        self.pump_events()
+        self.pumpEvents()
         self.view.outputbox.insert('1.0', inputString)
-        self.pump_events()
+        self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
   
 
@@ -82,16 +96,16 @@ class TestInput(TKinterTestCase):
 
     def test_Input(self):
         inputString = 'hi crocodile' + '\n'
-        self.pump_events()
+        self.pumpEvents()
         self.view.inputeditor.insert('1.0', inputString)
-        self.pump_events()
+        self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
     def test_Num_Input(self):
         inputString = '123'
-        self.pump_events()
+        self.pumpEvents()
         self.view.inputeditor.insert('1.0', inputString)
-        self.pump_events()
+        self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
 
     def test_StringandInt(self):
