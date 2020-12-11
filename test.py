@@ -102,7 +102,7 @@ class TestInput(TKinterTestCase):
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
     def test_Special_Characters(self):
-        inputString = '!?~' + '\n'
+        inputString = '!?@#$%^&*' + '\n'
         self.pumpEvents()
         self.view.inputeditor.insert('1.0', inputString)
         self.pumpEvents()
