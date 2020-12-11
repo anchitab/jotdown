@@ -109,18 +109,20 @@ class TestInput(TKTestCase):
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
     def test_spaces(self):
-        inputString = '   tests' + '\n'
+        inputString = ' tests' + '\n'
+        expectedString = 'tests' + '\n'
         self.pumpEvents()
         self.view.inputeditor.insert('1.0', inputString)
         self.pumpEvents()
-        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
+        self.assertEqual(self.view.outputbox.get("1.0", END), expectedString)
 
     def test_trailingSpaces(self):
-        inputString = 'tests   ' + '\n'
+        inputString = 'tests ' + '\n'
+        expectedString = 'tests' + '\n'
         self.pumpEvents()
         self.view.inputeditor.insert('1.0', inputString)
         self.pumpEvents()
-        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
+        self.assertEqual(self.view.outputbox.get("1.0", END), expectedString)
 
 class TestMarkdownFeatures(TKTestCase):
     def test_Bold(self):
