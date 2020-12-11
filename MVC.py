@@ -24,7 +24,6 @@ class View(Frame):
         Frame.__init__(self, master)
         self.master = master  
         self.init_window(master)
-		# self.invoker = Invoker()
         
     def init_window(self, master:Tk):
         # Default window title when Jotdown opens
@@ -139,6 +138,7 @@ class Controller():
         self.view.outputText(html)
 		
 # Run main application
+
 view = View(root)
 model = Model()
 controller = Controller(view, model)
