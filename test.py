@@ -1,36 +1,21 @@
 import tkinter 
-import os     
+import os
+
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import *
 from tkinter import font, filedialog
 from tkhtmlview import HTMLLabel
-
 from tkinter import messagebox as mbox
 from markdown2 import Markdown
 
 import unittest
 import MVC
 from MVC import *
-from MVC import View
-from MVC import Model
-
-# # WORKING BASE TEST
-# class GUITestCase(unittest.TestCase):
-#     def test_helloworld(self):
-#         testInput = "hello world"
-#         self.assertEqual(testInput, "hello world")
-
-# # run all tests from all sets
-# if __name__ == "__main__":
-#     unittest.main()
-
-import time
 
 class TKinterTestCase(unittest.TestCase):
-    """These methods are going to be the same for every GUI test,
-    so refactored them into a separate class
-    """
+
+class TKinterTestCase(unittest.TestCase):
     def setUp(self):
         self.root= tkinter.Tk()
         self.view = MVC.View(self.root)
@@ -111,13 +96,26 @@ class TestInput(TKinterTestCase):
         self.pump_events()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
 
-    # def test_Bold(self):
-    #     inputString = '*hi crocodile*'
-    #     boldString = 'hi crocodile' 
-    #     self.pump_events()
-    #     self.view.inputeditor.insert('1.0', inputString)
-    #     self.pump_events()
-    #     self.assertEqual(self.view.outputbox.get("1.0", END), boldString)
+    def test_StringandInt(self):
+        inputString = 'hi 123 crocodiles' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
+
+    def test_Special_Characters(self):
+        inputString = '!?~' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
+
+    def test_All_Types(self):
+        inputString = 'hello 123 crocodiles!' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
  
 if __name__ == '__main__':
     unittest.main()
