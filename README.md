@@ -59,6 +59,7 @@ We chose the design pattern Memento to implement the undo feature into our proje
  > Screenshots of the input/output after running your application
  
  ![](jotdown_demo1.gif)
+ ![](BoldItalicsBullets.gif)
  ## Installation/Usage
  > Instructions on installing and running your application
  
