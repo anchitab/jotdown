@@ -68,19 +68,7 @@ class TestInputEditor(TKinterTestCase):
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
-    def test_All_Types_Input(self):
-        inputString = 'hello 123 crocodiles!' + '\n'
-        self.pumpEvents()
-        self.view.inputeditor.insert('1.0', inputString)
-        self.pumpEvents()
-        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
-    def test_decimals_Input(self):
-        inputString = '3.1415' + '\n'
-        self.pumpEvents()
-        self.view.inputeditor.insert('1.0', inputString)
-        self.pumpEvents()
-        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
 class TestOutputBox(TKinterTestCase):
     
