@@ -14,8 +14,6 @@ import MVC
 from MVC import *
 
 class TKinterTestCase(unittest.TestCase):
-
-class TKinterTestCase(unittest.TestCase):
     def setUp(self):
         self.root= tkinter.Tk()
         self.view = MVC.View(self.root)
