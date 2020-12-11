@@ -30,7 +30,16 @@ class TKinterTestCase(unittest.TestCase):
             self.root.destroy()
             self.pump_events()
 
-    
+
+class TestInput(TKinterTestCase):
+
+    def test_Input(self):
+        inputString = 'hi crocodile' + '\n'
+        self.pump_events()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pump_events()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
+
  
 if __name__ == '__main__':
     unittest.main()
