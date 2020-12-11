@@ -40,20 +40,6 @@ class TestInputEditor(TKTestCase):
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
-    def test_Num_Input(self):
-        inputString = '123'
-        self.pumpEvents()
-        self.view.inputeditor.insert('1.0', inputString)
-        self.pumpEvents()
-        self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
-
-    def test_Word_Input(self):
-        inputString = 'test'
-        self.pumpEvents()
-        self.view.inputeditor.insert('1.0', inputString)
-        self.pumpEvents()
-        self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
-
     def test_StringandInt_Input(self):
         inputString = 'hi 123 crocodiles' + '\n'
         self.pumpEvents()
@@ -94,13 +80,6 @@ class TestInput(TKTestCase):
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
-    def test_Num_Input(self):
-        inputString = '123'
-        self.pumpEvents()
-        self.view.inputeditor.insert('1.0', inputString)
-        self.pumpEvents()
-        self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
-
     def test_StringandInt(self):
         inputString = 'hi 123 crocodiles' + '\n'
         self.pumpEvents()
@@ -109,7 +88,7 @@ class TestInput(TKTestCase):
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
     def test_Special_Characters(self):
-        inputString = '!?~' + '\n'
+        inputString = '!?@#$%^&*' + '\n'
         self.pumpEvents()
         self.view.inputeditor.insert('1.0', inputString)
         self.pumpEvents()
@@ -122,8 +101,22 @@ class TestInput(TKTestCase):
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
-    def test_decimals(self):
-        inputString = '3.1415' + '\n'
+    def test_decimalsAndChars(self):
+        inputString = '3.1415 pi' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
+
+    def test_spaces(self):
+        inputString = '   tests' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
+
+    def test_trailingSpaces(self):
+        inputString = 'tests   ' + '\n'
         self.pumpEvents()
         self.view.inputeditor.insert('1.0', inputString)
         self.pumpEvents()
@@ -139,12 +132,12 @@ class TestMarkdownFeatures(TKTestCase):
         self.assertEqual(self.view.outputbox.get("1.0", END), expectedString)
 
     def test_Italics(self):
-            inputString = '*hi crocodile*' 
-            expectedString = 'hi crocodile' + '\n'
-            self.pumpEvents()
-            self.view.inputeditor.insert('1.0', inputString)
-            self.pumpEvents()
-            self.assertEqual(self.view.outputbox.get("1.0", END), expectedString)
+        inputString = '*hi crocodile*' 
+        expectedString = 'hi crocodile' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), expectedString)
 
     def test_Bullets(self):
         inputString = '- carrots' + '\n' + '- hummus' + '\n' + '- celery'

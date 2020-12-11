@@ -72,5 +72,7 @@ We chose the design pattern Memento to implement the undo feature into our proje
  python3 MVC.py
  ```
  ## Testing
- > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
+ > How was your project tested/validated?
+ 
+ To test our project, we used python's unittest.
  
