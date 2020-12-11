@@ -25,8 +25,12 @@ class TKinterTestCase(unittest.TestCase):
         self.controller = MVC.Controller(self.view, self.model)
         self.pump_events()
 
-   
+    def tearDown(self):
+        if self.root:
+            self.root.destroy()
+            self.pump_events()
 
+    
  
 if __name__ == '__main__':
     unittest.main()
