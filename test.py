@@ -23,21 +23,25 @@ class TKinterTestCase(unittest.TestCase):
         self.view = MVC.View(self.root)
         self.model = MVC.Model()
         self.controller = MVC.Controller(self.view, self.model)
-        self.pump_events()
+        self.pumpEvents()
 
     def tearDown(self):
         if self.root:
             self.root.destroy()
-            self.pump_events()
+            self.pumpEvents()
+
+    def pumpEvents(self):
+        while self.root.dooneevent(tkinter._tkinter.DONT_WAIT):
+            pass
 
 
 class TestInput(TKinterTestCase):
 
     def test_Input(self):
         inputString = 'hi crocodile' + '\n'
-        self.pump_events()
+        self.pumpEvents()
         self.view.inputeditor.insert('1.0', inputString)
-        self.pump_events()
+        self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
  
