@@ -162,7 +162,13 @@ class TestMarkdownFeatures(TKTestCase):
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), expectedString)
 
-        
+    def test_Headers4(self):
+        inputString = '####Biology'
+        expectedString = 'Biology' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), expectedString)
 
 if __name__ == '__main__':
     unittest.main()
