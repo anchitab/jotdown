@@ -127,17 +127,16 @@ class Model():
         return html
 
 class Controller():
-	def __init__(self, view:View, model:Model) -> None:
-		self.model = model
+    def __init__(self, view:View, model:Model) -> None:
+        self.model = model
         self.view = view
-        print("it came here")
-		self.view.inputeditor.bind("<<Modified>>", self.processInputText)
-		
-	def processInputText(self, event):
-		view.inputeditor.edit_modified(0)
-		markdownText = view.getMarkdownText()
-		html = model.getHTML(markdownText)
-		view.outputText(html)
+        self.view.inputeditor.bind("<<Modified>>", self.processInputText)
+        
+    def processInputText(self, event):
+        self.view.inputeditor.edit_modified(0)
+        markdownText = self.view.getMarkdownText()
+        html = self.model.getHTML(markdownText)
+        self.view.outputText(html)
 		
 # Run main application
 view = View(root)
