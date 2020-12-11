@@ -48,6 +48,15 @@ class TKinterTestCase(unittest.TestCase):
             pass
 
 
+class TestInputEditor(TKinterTestCase):
+    def test_Input(self):
+        inputString = 'hi crocodile' + '\n'
+        self.pump_events()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pump_events()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
+
+
 class TestInput(TKinterTestCase):
 
     def test_Input(self):
