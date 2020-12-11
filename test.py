@@ -63,6 +63,12 @@ class TestInputEditor(TKinterTestCase):
         self.pump_events()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
 
+    def test_Word_Input(self):
+        inputString = 'test'
+        self.pump_events()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pump_events()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
 
 class TestInput(TKinterTestCase):
 
