@@ -59,8 +59,9 @@ We chose the design pattern Command to implement the menubar feature into our pr
  > Screenshots of the input/output after running your application
  
  ![](jotdown_demo1.gif)
- ![](BoldItalicsBullets.gif)
+ <img src="BoldItalicsBullets.gif" width="600" height="560"/>
  ![](nightMode.gif)
+ <img src="Command.gif" width="600" height="560"/>
  ## Installation/Usage
  > Instructions on installing and running your application
  
