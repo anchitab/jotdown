@@ -74,5 +74,9 @@ We chose the design pattern Memento to implement the undo feature into our proje
  ## Testing
  > How was your project tested/validated?
  
- To test our project, we used python's unittest.
+ To test our project, we used [Python's unittest](https://docs.python.org/3/library/unittest.html). Using assert methods to compare our expected and tested values, we were able to validate that our program executed its functions accurately. Python's test cases instances allowed us to run the tests, records failures, and check if all of the conditions are being met. 
  
+ To run our tests, you'd simply type this into the command line:
+ ```
+ python3 -m unittest
+ ```
