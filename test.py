@@ -49,6 +49,7 @@ class TKinterTestCase(unittest.TestCase):
 
 
 class TestInputEditor(TKinterTestCase):
+    
     def test_Input(self):
         inputString = 'hi crocodile' + '\n'
         self.pump_events()
@@ -70,12 +71,29 @@ class TestInputEditor(TKinterTestCase):
         self.pump_events()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
 
-    def test_Space_Input(self):
-        inputString = '    test'
+    # def test_Indent_Input(self):
+    #     inputString = '    test'
+    #     self.pump_events()
+    #     self.view.inputeditor.insert('1.0', inputString)
+    #     self.pump_events()
+    #     self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
+
+#     def test_Space_Input(self):
+#         inputString = ' '
+#         self.pump_events()
+#         self.view.inputeditor.insert('1.0', inputString)
+#         self.pump_events()
+#         self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')    
+
+class TestOutputBox(TKinterTestCase):
+    
+    def test_Initial_Output(self):
+        inputString = 'Welcome to Jotdown ✍️' + '\n'
         self.pump_events()
-        self.view.inputeditor.insert('1.0', inputString)
+        self.view.outputbox.insert('1.0', inputString)
         self.pump_events()
-        self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
+  
 
 class TestInput(TKinterTestCase):
 
