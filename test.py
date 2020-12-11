@@ -122,6 +122,19 @@ class TestInput(TKinterTestCase):
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
+    def test_decimalsAndInts(self):
+        inputString = '3.1415 3' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
+
+    def test_decimalsAndChars(self):
+        inputString = '3.1415 pi' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
  
 if __name__ == '__main__':
     unittest.main()
