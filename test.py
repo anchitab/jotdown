@@ -13,7 +13,7 @@ import unittest
 import MVC
 from MVC import *
 
-class TKinterTestCase(unittest.TestCase):
+class TKTestCase(unittest.TestCase):
     def setUp(self):
         self.root= tkinter.Tk()
         self.view = MVC.View(self.root)
@@ -31,7 +31,7 @@ class TKinterTestCase(unittest.TestCase):
             pass
 
 
-class TestInputEditor(TKinterTestCase):
+class TestInputEditor(TKTestCase):
     
     def test_Input(self):
         inputString = 'hi crocodile' + '\n'
@@ -75,7 +75,7 @@ class TestInputEditor(TKinterTestCase):
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
-class TestOutputBox(TKinterTestCase):
+class TestOutputBox(TKTestCase):
     
     def test_Initial_Output(self):
         inputString = 'Welcome to Jotdown ✍️' + '\n'
@@ -85,7 +85,7 @@ class TestOutputBox(TKinterTestCase):
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
   
 
-class TestInput(TKinterTestCase):
+class TestInput(TKTestCase):
 
     def test_Input(self):
         inputString = 'hi crocodile' + '\n'
@@ -129,7 +129,7 @@ class TestInput(TKinterTestCase):
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
- class TestMarkdownFeatures(TKTestCase):
+class TestMarkdownFeatures(TKTestCase):
     def test_Bold(self):
         inputString = '**hi crocodile**' 
         expectedString = 'hi crocodile' + '\n'
@@ -137,6 +137,15 @@ class TestInput(TKinterTestCase):
         self.view.inputeditor.insert('1.0', inputString)
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), expectedString)
+
+    def test_Italics(self):
+            inputString = '*hi crocodile*' 
+            expectedString = 'hi crocodile' + '\n'
+            self.pumpEvents()
+            self.view.inputeditor.insert('1.0', inputString)
+            self.pumpEvents()
+            self.assertEqual(self.view.outputbox.get("1.0", END), expectedString)
+
 
 if __name__ == '__main__':
     unittest.main()
