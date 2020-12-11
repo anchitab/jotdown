@@ -13,7 +13,7 @@ import unittest
 import MVC
 from MVC import *
 
-class TKinterTestCase(unittest.TestCase):
+class TKTestCase(unittest.TestCase):
     def setUp(self):
         self.root= tkinter.Tk()
         self.view = MVC.View(self.root)
@@ -31,7 +31,7 @@ class TKinterTestCase(unittest.TestCase):
             pass
 
 
-class TestInputEditor(TKinterTestCase):
+class TestInputEditor(TKTestCase):
     
     def test_Input(self):
         inputString = 'hi crocodile' + '\n'
@@ -39,20 +39,6 @@ class TestInputEditor(TKinterTestCase):
         self.view.inputeditor.insert('1.0', inputString)
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
-
-    def test_Num_Input(self):
-        inputString = '123'
-        self.pumpEvents()
-        self.view.inputeditor.insert('1.0', inputString)
-        self.pumpEvents()
-        self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
-
-    def test_Word_Input(self):
-        inputString = 'test'
-        self.pumpEvents()
-        self.view.inputeditor.insert('1.0', inputString)
-        self.pumpEvents()
-        self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
 
     def test_StringandInt_Input(self):
         inputString = 'hi 123 crocodiles' + '\n'
@@ -75,7 +61,7 @@ class TestInputEditor(TKinterTestCase):
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
-class TestOutputBox(TKinterTestCase):
+class TestOutputBox(TKTestCase):
     
     def test_Initial_Output(self):
         inputString = 'Welcome to Jotdown ✍️' + '\n'
@@ -85,7 +71,7 @@ class TestOutputBox(TKinterTestCase):
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
   
 
-class TestInput(TKinterTestCase):
+class TestInput(TKTestCase):
 
     def test_Input(self):
         inputString = 'hi crocodile' + '\n'
@@ -93,13 +79,6 @@ class TestInput(TKinterTestCase):
         self.view.inputeditor.insert('1.0', inputString)
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
-
-    def test_Num_Input(self):
-        inputString = '123'
-        self.pumpEvents()
-        self.view.inputeditor.insert('1.0', inputString)
-        self.pumpEvents()
-        self.assertEqual(self.view.outputbox.get("1.0", END), inputString + '\n')
 
     def test_StringandInt(self):
         inputString = 'hi 123 crocodiles' + '\n'
@@ -117,13 +96,6 @@ class TestInput(TKinterTestCase):
 
     def test_All_Types(self):
         inputString = 'hello 123 crocodiles!' + '\n'
-        self.pumpEvents()
-        self.view.inputeditor.insert('1.0', inputString)
-        self.pumpEvents()
-        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
-
-    def test_decimals(self):
-        inputString = '3.1415' + '\n'
         self.pumpEvents()
         self.view.inputeditor.insert('1.0', inputString)
         self.pumpEvents()
@@ -149,6 +121,47 @@ class TestInput(TKinterTestCase):
         self.view.inputeditor.insert('1.0', inputString)
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
- 
+
+class TestMarkdownFeatures(TKTestCase):
+    def test_Bold(self):
+        inputString = '**hi crocodile**' 
+        expectedString = 'hi crocodile' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), expectedString)
+
+    def test_Italics(self):
+        inputString = '*hi crocodile*' 
+        expectedString = 'hi crocodile' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), expectedString)
+
+    def test_Bullets(self):
+        inputString = '- carrots' + '\n' + '- hummus' + '\n' + '- celery'
+        expectedString = '\n' + '\t•\t' + 'carrots\n' + '\t•\t' + 'hummus\n' + '\t•\t' + 'celery\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), expectedString)
+
+    def test_Headers1(self):
+        inputString = '#Biology'
+        expectedString = 'Biology' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), expectedString)
+
+    def test_Headers4(self):
+        inputString = '####Biology'
+        expectedString = 'Biology' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), expectedString)
+
 if __name__ == '__main__':
     unittest.main()
