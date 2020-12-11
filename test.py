@@ -44,13 +44,19 @@ class TestInput(TKinterTestCase):
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
-    def test_Spaces(self):
-        inputString = 'hi   crocodile' + '\n'
+    def test_Integers(self):
+        inputString = '123' + '\n'
         self.pumpEvents()
         self.view.inputeditor.insert('1.0', inputString)
         self.pumpEvents()
         self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
+    def test_StringandInt(self):
+        inputString = 'hi 123 crocodiles' + '\n'
+        self.pumpEvents()
+        self.view.inputeditor.insert('1.0', inputString)
+        self.pumpEvents()
+        self.assertEqual(self.view.outputbox.get("1.0", END), inputString)
 
  
 if __name__ == '__main__':
